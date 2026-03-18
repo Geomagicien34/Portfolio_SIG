@@ -1,0 +1,11 @@
+when:
+  branch: pages
+  event: push
+
+steps:
+  mirror-to-github:
+    image: alpine/git:latest
+    commands:
+      - git remote add github https://$${GITHUB_TOKEN}@github.com/Geomagicien34/Geomagicien34.github.io.git
+      - git push --force github pages:main
+    secrets: [github_token]
