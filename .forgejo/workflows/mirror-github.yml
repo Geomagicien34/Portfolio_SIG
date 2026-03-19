@@ -1,11 +1,18 @@
-when:
-  branch: pages
-  event: push
+name: Mirror to GitHub
+on:
+  push:
+    branches:
+      - main
+      - pages
 
-steps:
-  mirror-to-github:
-    image: alpine/git:latest
-    commands:
-      - git remote add github https://$${GITHUB_TOKEN}@github.com/Geomagicien34/Geomagicien34.github.io.git
-      - git push --force github pages:main
-    secrets: [github_token]
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Mirror to GitHub
+        run: |
+          git remote add github https://${{ secrets._GITHUB_USERNAME }}:${{ secrets._GITHUB_TOKEN }}@github.com/Geomagicien34/Portfolio_SIG.git
+          git push github --mirror
