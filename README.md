@@ -1,9 +1,3 @@
-<<<<<<< HEAD
-# Portfolio_SIG
-
-Portfolio géomatique open source.
-Site web public pour montrer mes projets en géomatique et présenter mon CV.
-=======
 # Portfolio Géomatique Open Source
 
 Portfolio de géomaticien avec stack OSGeo (libre et Open Source).
@@ -11,6 +5,7 @@ Portfolio de géomaticien avec stack OSGeo (libre et Open Source).
 ## 🌐 Site
 
 **[Geomagicien.codeberg.page](https://Geomagicien.codeberg.page)**
+(https://geomagicien.codeberg.page/Portfolio_SIG/)
 
 ## 🛠️ Stack
 
@@ -36,4 +31,3 @@ Portfolio de géomaticien avec stack OSGeo (libre et Open Source).
 - Codeberg : [@Geomagicien](https://codeberg.org/Geomagicien)
 - GitHub : [@Geomagicien34](https://github.com/Geomagicien34)
 - Email : etudes.geomatique@ikmail.com
->>>>>>> 7292af3 (Structure initiale de mon portfolio SIG)
