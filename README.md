@@ -4,7 +4,7 @@ Portfolio de géomaticien avec stack OSGeo (libre et Open Source).
 
 ## 🌐 Site
 
-Geomagicien.codeberg.page(https://geomagicien.codeberg.page/Portfolio_SIG/)
+Geomagicien.codeberg.page (https://geomagicien.codeberg.page/Portfolio_SIG/)
 
 ## 🛠️ Stack
 
