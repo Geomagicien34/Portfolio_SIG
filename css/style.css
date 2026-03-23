@@ -19,3 +19,16 @@ margin-bottom:40px;
 nav a{
 margin-right:20px;
 }
+
+.hero-logo {
+    width: 100px;
+    height: auto;
+    margin-bottom: 1.5rem;
+}
+
+.hero-intro {
+    margin-top: 1rem;
+    font-size: 1.1rem;
+    opacity: 0.8;
+    max-width: 500px;
+}
