@@ -1,0 +1,107 @@
+/* Apparition au scroll */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Curseur personnalisé */
+.cursor {
+    width: 8px;
+    height: 8px;
+    background: #38bdf8;
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.1s;
+}
+
+.cursor-follower {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #38bdf8;
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9998;
+    transition: transform 0.3s, opacity 0.3s;
+    opacity: 0.5;
+}
+
+/* Animations des sections */
+.hero-title .title-line {
+    display: block;
+    animation: fadeInUp 0.8s ease forwards;
+    opacity: 0;
+}
+
+.title-line:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.hero-subtitle {
+    animation: fadeInUp 0.8s ease 0.4s forwards;
+    opacity: 0;
+}
+
+.hero-intro {
+    animation: fadeInUp 0.8s ease 0.6s forwards;
+    opacity: 0;
+}
+
+/* Animation des cartes projets */
+.project-content {
+    animation: fadeInUp 0.8s ease forwards;
+    opacity: 0;
+}
+
+/* Animation des tags */
+.tag {
+    transition: transform 0.2s, background 0.2s;
+}
+
+.tag:hover {
+    transform: scale(1.1);
+}
+
+/* Animation des liens */
+.link-animated {
+    transition: gap 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.link-animated:hover {
+    gap: 14px;
+}
+
+/* Animation scroll indicator */
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(8px); }
+}
+
+.scroll-arrow {
+    animation: bounce 1.5s infinite;
+}
+
+/* Stack items */
+.stack-item {
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.stack-item:hover {
+    transform: translateY(-5px);
+}
