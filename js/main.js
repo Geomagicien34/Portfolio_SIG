@@ -28,14 +28,59 @@ document.querySelectorAll('a, button, .project-image').forEach(el => {
     });
 });
 
+
+// Menu burger
 const burger = document.getElementById('burger');
+const menu = document.getElementById('menu');
+
+if (burger && menu) {
+    burger.addEventListener('click', () => {
+        menu.classList.toggle('active');
+    });
+
+    // Fermer le menu en cliquant sur un lien
+    document.querySelectorAll('.menu-link').forEach(link => {
+        link.addEventListener('click', () => {
+            menu.classList.remove('active');
+        });
+    });
+}
+
+// === MENU BURGER ===
+document.addEventListener("DOMContentLoaded", () => {
+    const burger = document.getElementById("burger");
+    const menu = document.getElementById("menu");
+
+    if (!burger || !menu) return;
+
+    burger.addEventListener("click", () => {
+        menu.classList.toggle("active");
+        burger.classList.toggle("open");
+    });
+
+    // Fermeture lorsque l’on clique sur un lien
+    document.querySelectorAll(".menu-link").forEach(link => {
+        link.addEventListener("click", () => {
+            menu.classList.remove("active");
+            burger.classList.remove("open");
+        });
+    });
+});
+
+
+
+
+
+
+
+/*const burger = document.getElementById('burger');
 const menu = document.getElementById('menu');
 
 burger.addEventListener('click', () => {
     burger.classList.toggle('active');
     menu.classList.toggle('active');
     document.body.style.overflow = menu.classList.contains('active') ? 'hidden' : '';
-});
+});*/
 
 document.querySelectorAll('.menu-link').forEach(link => {
     link.addEventListener('click', () => {

@@ -3,6 +3,8 @@ const observerOptions = {
     rootMargin: '0px 0px -100px 0px'
 };
 
+
+/*
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -10,6 +12,7 @@ const observer = new IntersectionObserver((entries) => {
         }
     });
 }, observerOptions);
+*/
 
 document.addEventListener('DOMContentLoaded', () => {
     const elementsToAnimate = document.querySelectorAll(
