@@ -8,12 +8,20 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <nav class="nav">
-        <a href="index.html" class="back-link">← Retour</a>
+
+    <!-- Nav avec burger et retour -->
+    <nav class="nav" style="display:flex; justify-content:space-between; align-items:center; padding: 1rem 2rem;">
+        <a href="index.html" class="back-link" style="color:#58a6ff; font-size:1rem;">← Accueil</a>
+        <div style="display:flex; gap:1.5rem; flex-wrap:wrap;">
+            <a href="index.html#projects" style="color:#c9d1d9;">Projets</a>
+            <a href="index.html#stack" style="color:#c9d1d9;">Stack</a>
+            <a href="index.html#contact" style="color:#c9d1d9;">Contact</a>
+        </div>
     </nav>
 
     <section class="cv-section">
         <div class="cv-container">
+            <img src="assets/images/logo_geomatique.png" alt="Logo" style="width:80px; margin: 0 auto 1.5rem; filter: drop-shadow(0 0 12px #58a6ff88);">
             <h1 class="cv-title">Mon CV</h1>
             <p class="cv-subtitle">Choisissez la version de votre choix</p>
 
@@ -24,7 +32,6 @@
                     <p>CV complet en français</p>
                     <span class="cv-btn">Télécharger PDF</span>
                 </a>
-
                 <a href="assets/cv/CV-en.pdf" target="_blank" class="cv-card">
                     <div class="cv-flag">🇬🇧</div>
                     <h2>English Version</h2>
@@ -34,47 +41,6 @@
             </div>
         </div>
     </section>
+
 </body>
 </html>
-
-
-
-
-<!--
-
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CV - Géomaticien</title>
-    <link rel="icon" type="image/png" href="../assets/images/logo_geomatique.png">
-    <link rel="stylesheet" href="../css/style.css">
-</head>
-<body>
-    <nav class="nav">
-        <a href="../index.html" class="back-link">← Retour</a>
-    </nav>
-
-    <section class="cv-section">
-        <div class="cv-container">
-            <h1 class="cv-title">Mon CV</h1>
-            <p class="cv-subtitle">Choisissez la version de votre choix</p>
-            <div class="cv-cards">
-                <a href="../assets/cv/CV-fr.pdf" target="_blank" class="cv-card">
-                    <div class="cv-flag">🇫🇷</div>
-                    <h2>Version Française</h2>
-                    <span class="cv-btn">Télécharger PDF</span>
-                </a>
-                <a href="../assets/cv/CV-en.pdf" target="_blank" class="cv-card">
-                    <div class="cv-flag">🇬🇧</div>
-                    <h2>English Version</h2>
-                    <span class="cv-btn">Download PDF</span>
-                </a>
-            </div>
-        </div>
-    </section>
-</body>
-</html>*/
-
--->

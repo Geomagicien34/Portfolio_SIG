@@ -518,3 +518,32 @@ img {
     display: block;
     opacity: 1;
 }
+
+/*Centrer le carré 'Environnement' dans la stack open source*/
+.stack-grid {
+    justify-items: center;
+}
+
+.stack-item:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+    max-width: 500px;
+    width: 100%;
+}
+
+/*Centrer le logo et le titre du dernier carré 'Environnement'*/
+
+.stack-item:last-child:nth-child(odd) {
+    text-align: center;
+}
+
+.stack-item:last-child:nth-child(odd) .stack-icon {
+    display: flex;
+    justify-content: center;
+}
+
+/*Aérer le texte dans tous les carrés*/
+/*
+.stack-item p {
+    line-height: 1.8;
+    opacity: 0.85;
+}*/

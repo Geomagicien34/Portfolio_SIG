@@ -1,40 +1,13 @@
-const observerOptions = {
-    threshold: 0.15,
-    rootMargin: '0px 0px -100px 0px'
-};
-
-
-/*
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-        }
-    });
-}, observerOptions);
-*/
-
 document.addEventListener('DOMContentLoaded', () => {
-    const elementsToAnimate = document.querySelectorAll(
-        '.project-content, .project-visual, .stack-item, .contact-container'
-    );
-    
-    elementsToAnimate.forEach(el => {
-        el.classList.add('fade-in-up');
-        observer.observe(el);
-    });
-    
     animateHeroTitle();
 });
 
 function animateHeroTitle() {
     const titleLines = document.querySelectorAll('.hero-title .title-line');
-    
     titleLines.forEach((line, lineIndex) => {
         const text = line.textContent;
         line.textContent = '';
         line.classList.add('split-text');
-        
         text.split('').forEach((char, charIndex) => {
             const span = document.createElement('span');
             span.classList.add('char');
@@ -43,7 +16,6 @@ function animateHeroTitle() {
             line.appendChild(span);
         });
     });
-    
     setTimeout(() => {
         document.querySelectorAll('.split-text').forEach(el => {
             el.classList.add('visible');
@@ -51,30 +23,18 @@ function animateHeroTitle() {
     }, 100);
 }
 
-let lastScrollY = window.scrollY;
-
-window.addEventListener('scroll', () => {
-    const scrollY = window.scrollY;
-    
-    document.querySelectorAll('.project-image').forEach((img, index) => {
-        const speed = 0.3;
-        const yPos = scrollY * speed;
-        img.style.transform = `translateY(${yPos * (index % 2 === 0 ? 1 : -1)}px) scale(1.1)`;
-    });
-    
-    lastScrollY = scrollY;
-});
-
-
-// Curseur personnalisé
-const cursor = document.querySelector('.cursor');
-const follower = document.querySelector('.cursor-follower');
-
-document.addEventListener('mousemove', (e) => {
-    cursor.style.left = e.clientX + 'px';
-    cursor.style.top = e.clientY + 'px';
-    setTimeout(() => {
-        follower.style.left = e.clientX + 'px';
-        follower.style.top = e.clientY + 'px';
-    }, 80);
-});
+// Curseur - desktop uniquement
+if (window.matchMedia('(pointer: fine)').matches) {
+    const cursor = document.querySelector('.cursor');
+    const follower = document.querySelector('.cursor-follower');
+    if (cursor && follower) {
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+            setTimeout(() => {
+                follower.style.left = e.clientX + 'px';
+                follower.style.top = e.clientY + 'px';
+            }, 80);
+        });
+    }
+}

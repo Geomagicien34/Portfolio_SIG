@@ -61,10 +61,10 @@
 }
 
 /* Animation des cartes projets */
-.project-content {
+/*.project-content {
     animation: fadeInUp 0.8s ease forwards;
     opacity: 0;
-}
+}*/
 
 /* Animation des tags */
 .tag {
@@ -172,8 +172,6 @@
     animation: fadeInUp 0.8s ease 0.6s forwards;
     opacity: 0;
 }
-
-/* NE PAS animer project-content - cause superposition */
 
 .tag {
     transition: transform 0.2s, background 0.2s;
