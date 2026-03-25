@@ -31,6 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // === COULEUR DE FOND AU SCROLL ===
+/*
     const sections = document.querySelectorAll('[data-color]');
     const colorObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -40,5 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }, { threshold: 0.5 });
     sections.forEach(section => colorObserver.observe(section));
+*/
+
 
 });
