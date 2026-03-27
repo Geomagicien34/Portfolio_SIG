@@ -1,14 +1,26 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
+<!-- ================================================
+     PORTFOLIO - ENGLISH VERSION
+     ================================================ -->
 <head>
+    <!-- Meta data -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Geomagicien - Open Source Geomatician</title>
+    
+    <!-- Favicon -->
     <link rel="icon" type="image/png" href="../../assets/images/logo_geomatique.png">
+    
+    <!-- SEO description -->
     <meta name="description" content="Geomatic portfolio - QGIS/ESRI, PostgreSQL with PostGIS, OpenLayers, Geoserver, Python">
+    
+    <!-- Stylesheets -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v8.2.0/ol.css">
     <link rel="stylesheet" href="../../css/style.css">
     <link rel="stylesheet" href="../../css/animations.css">
+    
+    <!-- Open Graph meta tags -->
     <meta property="og:title" content="Geomagicien - Open Source Geomatician">
     <meta property="og:description" content="Geomatic portfolio - QGIS, PostGIS, OpenLayers, Python, R">
     <meta property="og:image" content="https://geomagicien.codeberg.page/Portfolio_SIG/assets/images/logo_geomatique.png">
@@ -16,24 +28,39 @@
     <meta property="og:type" content="website">
 </head>
 <body>
+    <!-- ================================================
+         CUSTOM CURSOR
+         ================================================ -->
     <div class="cursor"></div>
     <div class="cursor-follower"></div>
     
+    <!-- ================================================
+         NAVIGATION (Fixed header)
+         ================================================ -->
     <nav class="nav">
+        <!-- Buttons container (burger, language, theme) -->
         <div class="nav-container">
+            <!-- Burger menu button (mobile) -->
             <button class="burger-btn" id="burger">
                 <span></span>
                 <span></span>
                 <span></span>
             </button>
+            <!-- Language switch button -->
             <a href="../../index.html" class="lang-btn">FR</a>
+            <!-- Theme switch button -->
             <button id="theme-toggle" class="theme-btn" title="Toggle theme">
                 <span class="theme-icon">☀️</span>
             </button>
         </div>
     </nav>
+    
+    <!-- ================================================
+         MENU OVERLAY (Mobile)
+         ================================================ -->
     <div class="menu-overlay" id="menu">
         <div class="menu-content">
+            <!-- Navigation links -->
             <ul class="menu-list">
                 <li class="menu-item">
                     <a href="#hero" class="menu-link">
@@ -60,12 +87,13 @@
                     </a>
                 </li>
                 <li class="menu-item">
-                    <a href="../cv.html" class="menu-link">
+                    <a href="cv.html" class="menu-link">
                         <span class="menu-number">05</span>
                         <span class="menu-text">CV</span>
                     </a>
                 </li>
             </ul>
+            <!-- Social links -->
             <div class="menu-footer">
                 <a href="https://codeberg.org/Geomagicien" class="social-link">Codeberg</a>
                 <a href="https://github.com/Geomagicien" class="social-link">GitHub</a>
@@ -77,19 +105,30 @@
         </div>
     </div>
     
+    <!-- ================================================
+         HERO SECTION (Home)
+         ================================================ -->
     <section id="hero" class="section-hero">
+        <!-- OpenStreetMap background -->
         <div class="map-background" id="map-hero"></div>
+        <!-- Dark overlay -->
         <div class="hero-overlay"></div>
+        <!-- Main content -->
         <div class="hero-content">
             <div class="hero-text">
+                <!-- Logo -->
                 <img src="../../assets/images/logo_geomatique.png" alt="Geomatician Logo" class="hero-logo">
+                <!-- Animated title -->
                 <h1 class="hero-title">
                     <span class="title-line">Open Source</span>
                     <span class="title-line">Geomatician</span>
                 </h1>
+                <!-- Tech stack -->
                 <p class="hero-subtitle">QGIS • PostGIS • OpenLayers • Python • R</p>
+                <!-- Introduction -->
                 <p class="hero-intro">Geomatician passionate about new technologies, cartography, webmapping, programming and open source (FOSS). I explore, analyze and visualize territory with free tools.</p>
             </div>
+            <!-- Scroll indicator -->
             <div class="scroll-indicator">
                 <span class="scroll-text"><strong>Discover my projects</strong></span>
                 <hr class="scroll-divider">
@@ -102,6 +141,11 @@
         </div>
     </section>
     
+    <!-- ================================================
+         PROJECTS SECTION
+         ================================================ -->
+    
+    <!-- Project 1: QGIS Plugin -->
     <section class="section-project" id="projects" data-color="#1e293b">
         <div class="project-container">
             <div class="project-visual">
@@ -133,6 +177,7 @@
         </div>
     </section>
     
+    <!-- Project 2: Interactive WebMapping (reversed) -->
     <section class="section-project reversed" data-color="#0f172a">
         <div class="project-container">
             <div class="project-content">
@@ -164,6 +209,7 @@
         </div>
     </section>
     
+    <!-- Project 3: PostGIS Scripts -->
     <section class="section-project" data-color="#1e293b">
         <div class="project-container">
             <div class="project-visual">
@@ -195,10 +241,14 @@
         </div>
     </section>
     
+    <!-- ================================================
+         STACK SECTION (Technologies)
+         ================================================ -->
     <section id="stack" class="section-stack" data-color="#0f172a">
         <div class="stack-container">
             <h2 class="stack-title">Open Source Stack</h2>
             <div class="stack-grid">
+                <!-- Desktop GIS -->
                 <div class="stack-item">
                     <div class="stack-icon">
                         <svg width="40" height="40" viewBox="0 0 24 24" fill="none">
@@ -208,6 +258,7 @@
                     <h3>Desktop GIS</h3>
                     <p>QGIS • GRASS GIS • GDAL</p>
                 </div>
+                <!-- Spatial Databases -->
                 <div class="stack-item">
                     <div class="stack-icon">
                         <svg width="40" height="40" viewBox="0 0 24 24" fill="none">
@@ -217,6 +268,7 @@
                     <h3>Spatial Databases</h3>
                     <p>PostgreSQL/PostGIS • SpatiaLite • Geoserver</p>
                 </div>
+                <!-- Webmapping -->
                 <div class="stack-item">
                     <div class="stack-icon">
                         <svg width="40" height="40" viewBox="0 0 24 24" fill="none">
@@ -228,6 +280,7 @@
                     <h3>Webmapping</h3>
                     <p>OpenLayers • Leaflet • MapLibre</p>
                 </div>
+                <!-- Development -->
                 <div class="stack-item">
                     <div class="stack-icon">
                         <svg width="40" height="40" viewBox="0 0 24 24" fill="none">
@@ -237,6 +290,7 @@
                     <h3>Development</h3>
                     <p>Python • R (sf) • JavaScript • PHP • Git • VSCodium • RStudio</p>
                 </div>
+                <!-- Environment -->
                 <div class="stack-item">
                     <div class="stack-icon">
                         <svg width="40" height="40" viewBox="0 0 24 24" fill="none">
@@ -255,13 +309,18 @@
         </div>
     </section>
     
+    <!-- ================================================
+         CONTACT SECTION
+         ================================================ -->
     <section id="contact" class="section-contact" data-color="#1e293b">
         <div class="contact-container">
             <h2 class="contact-title">
                 <span class="title-line">Let's work</span>
                 <span class="title-line">together</span>
             </h2>
+            <!-- Email -->
             <a href="mailto:etudes.geomatique@ikmail.com" class="email-giant">etudes.geomatique@ikmail.com</a>
+            <!-- Social links -->
             <div class="contact-links">
                 <a href="https://codeberg.org/Geomagicien" class="contact-link">
                     <span>Codeberg</span>
@@ -300,9 +359,16 @@
         </div>
     </section>
     
+    <!-- ================================================
+         JAVASCRIPT SCRIPTS
+         ================================================ -->
+    <!-- OpenLayers (map) -->
     <script src="https://cdn.jsdelivr.net/npm/ol@v8.2.0/dist/ol.js"></script>
+    <!-- Animations (title, cursor) -->
     <script src="../../js/animations.js"></script>
+    <!-- OpenLayers map (animated background) -->
     <script src="../../js/map.js"></script>
+    <!-- Interactions (menu, theme, language) -->
     <script src="../../js/main.js"></script>
 </body>
 </html>

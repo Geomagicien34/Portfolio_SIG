@@ -1,16 +1,31 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" data-theme="dark">
+<!-- ================================================
+     PAGE CV - VERSION FRANÇAISE
+     ================================================ -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CV - Géomaticien</title>
+    
+    <!-- Favicon -->
     <link rel="icon" type="image/png" href="../assets/images/logo_geomatique.png">
+    
+    <!-- Feuilles de styles -->
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/animations.css">
+    
+    <!-- Script pour le thème (mémorisé) -->
+    <script src="../js/main.js" defer></script>
 </head>
-<body style="background:#0d1117;">
-
+<body>
+    <!-- ================================================
+         NAVIGATION (Header fixe)
+         ================================================ -->
     <nav class="nav" style="display:flex; justify-content:space-between; align-items:center; padding:1rem 2rem; background:rgba(10,15,40,0.97); position:fixed; top:0; left:0; right:0; z-index:100;">
+        <!-- Lien retour accueil -->
         <a href="../index.html" style="color:#58a6ff;">← Accueil</a>
+        <!-- Liens de navigation -->
         <div style="display:flex; gap:1.5rem; flex-wrap:wrap;">
             <a href="../index.html#projects" style="color:#c9d1d9;">Projets</a>
             <a href="../index.html#stack" style="color:#c9d1d9;">Stack</a>
@@ -18,19 +33,28 @@
         </div>
     </nav>
 
+    <!-- ================================================
+         SECTION CV
+         ================================================ -->
     <section class="cv-section">
         <div class="cv-container">
+            <!-- Logo -->
             <img src="../assets/images/logo_geomatique.png" alt="Logo" style="width:80px; margin:0 auto 1.5rem; filter:drop-shadow(0 0 12px #58a6ff88);">
+            <!-- Titre -->
             <h1 class="cv-title">Mon CV</h1>
+            <!-- Sous-titre -->
             <p class="cv-subtitle">Choisissez la version de votre choix</p>
 
+            <!-- Cartes de téléchargement -->
             <div class="cv-cards">
+                <!-- Carte CV Français -->
                 <a href="../assets/cv/CV-fr.pdf" target="_blank" class="cv-card">
                     <div class="cv-flag">🇫🇷</div>
                     <h2>Version Française</h2>
                     <p>CV complet en français</p>
                     <span class="cv-btn">Télécharger PDF</span>
                 </a>
+                <!-- Carte CV Anglais -->
                 <a href="../assets/cv/CV-en.pdf" target="_blank" class="cv-card">
                     <div class="cv-flag">🇬🇧</div>
                     <h2>English Version</h2>
@@ -40,6 +64,5 @@
             </div>
         </div>
     </section>
-
 </body>
 </html>

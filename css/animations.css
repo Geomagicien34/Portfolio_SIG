@@ -1,4 +1,14 @@
-/* Apparition au scroll */
+/**
+ * ============================================
+ * ANIMATIONS CSS - Portfolio Géomaticien
+ * ============================================
+ */
+
+/* -------------------------------------------------
+   ANIMATIONS KEYFRAMES
+   ------------------------------------------------- */
+
+/** Animation d'apparition avec déplacement vers le haut */
 @keyframes fadeInUp {
     from {
         opacity: 0;
@@ -10,131 +20,69 @@
     }
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+/** Animation de rebond pour la flèche de défilement */
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(8px); }
 }
 
-/* Curseur personnalisé */
-.cursor {
-    width: 8px;
-    height: 8px;
-    background: #38bdf8;
-    border-radius: 50%;
-    position: fixed;
-    pointer-events: none;
-    z-index: 9999;
-    transition: transform 0.1s;
-}
+/* -------------------------------------------------
+   ANIMATIONS HERO
+   ------------------------------------------------- */
 
-.cursor-follower {
-    width: 30px;
-    height: 30px;
-    border: 1px solid #38bdf8;
-    border-radius: 50%;
-    position: fixed;
-    pointer-events: none;
-    z-index: 9998;
-    transition: transform 0.3s, opacity 0.3s;
-    opacity: 0.5;
-}
-
-/* Animations des sections */
+/** Animation du titre principal */
 .hero-title .title-line {
     display: block;
     animation: fadeInUp 0.8s ease forwards;
     opacity: 0;
 }
 
+/** Délai pour la deuxième ligne du titre */
 .title-line:nth-child(2) {
     animation-delay: 0.2s;
 }
 
+/** Animation du sous-titre */
 .hero-subtitle {
     animation: fadeInUp 0.8s ease 0.4s forwards;
     opacity: 0;
 }
 
+/** Animation du texte d'introduction */
 .hero-intro {
     animation: fadeInUp 0.8s ease 0.6s forwards;
     opacity: 0;
 }
 
-/* Animation des cartes projets */
-/*.project-content {
-    animation: fadeInUp 0.8s ease forwards;
-    opacity: 0;
-}*/
-
-/* Animation des tags */
-.tag {
-    transition: transform 0.2s, background 0.2s;
-}
-
-.tag:hover {
-    transform: scale(1.1);
-}
-
-/* Animation des liens */
-.link-animated {
-    transition: gap 0.3s;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.link-animated:hover {
-    gap: 14px;
-}
-
-/* Animation scroll indicator */
-@keyframes bounce {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(8px); }
-}
-
+/** Animation de la flèche de défilement */
 .scroll-arrow {
     animation: bounce 1.5s infinite;
 }
 
-/* Stack items */
-.stack-item {
-    transition: transform 0.3s, box-shadow 0.3s;
+/* -------------------------------------------------
+   EFFETS HOVER
+   ------------------------------------------------- */
+
+/** Effet de zoom au survol des tags */
+.tag:hover {
+    transform: scale(1.1);
 }
 
+/** Animation de l'espacement des liens au survol */
+.link-animated:hover {
+    gap: 14px;
+}
+
+/** Animation de soulèvement des cartes stack au survol */
 .stack-item:hover {
     transform: translateY(-5px);
 }
 
+/* -------------------------------------------------
+   CURSEUR PERSONNALISÉ (Desktop uniquement)
+   ------------------------------------------------- */
 
-
-/* Curseur - desktop uniquement */
-@media (pointer: fine) {
-    .cursor {
-        width: 8px;
-        height: 8px;
-        background: #38bdf8;
-        border-radius: 50%;
-        position: fixed;
-        pointer-events: none;
-        z-index: 9999;
-        transition: transform 0.1s;
-    }
-
-    .cursor-follower {
-        width: 30px;
-        height: 30px;
-        border: 1px solid #38bdf8;
-        border-radius: 50%;
-        position: fixed;
-        pointer-events: none;
-        z-index: 9998;
-        transition: transform 0.3s, opacity 0.3s;
-        opacity: 0.5;
-    }
-}
-
-/* Cache le curseur sur mobile */
+/** Cache le curseur sur mobile (écrans tactiles) */
 @media (pointer: coarse) {
     .cursor,
     .cursor-follower {

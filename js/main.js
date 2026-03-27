@@ -1,15 +1,65 @@
+/**
+ * ============================================
+ * MAIN.JS - Portfolio Géomaticien
+ * ============================================
+ */
+
+// Attend que le DOM soit complètement chargé
 document.addEventListener('DOMContentLoaded', () => {
 
-    // === MENU BURGER ===
-    const burger = document.getElementById('burger');
-    const menu = document.getElementById('menu');
+    // ============================================
+    // GESTION DE LA LANGUE (FR / EN)
+    // ============================================
+
+    /** Bouton de changement de langue */
+    const langBtn = document.querySelector('.lang-btn');
+
+    /** Récupère le chemin de la page actuelle */
+    const currentPage = window.location.pathname;
+
+    /** Vérifie si on est sur la page anglaise */
+    const isEnglishPage = currentPage.includes('/en/');
+
+    // Si page anglaise, mémorise la langue et corrige les liens Home
+    if (isEnglishPage) {
+        localStorage.setItem('lang', 'en');
+
+        // Corrige les liens "Accueil" pour pointer vers la version anglaise
+        document.querySelectorAll('.menu-link[href*="index"]').forEach(link => {
+            const href = link.getAttribute('href');
+            if (href === '../index.html' || href === '../../index.html') {
+                link.setAttribute('href', '../../index.html');
+            }
+        });
+    }
+
+    // Au clic sur le bouton de langue
+    langBtn?.addEventListener('click', () => {
+        // Bascule entre FR et EN dans le localStorage
+        if (currentPage.includes('/en/')) {
+            localStorage.setItem('lang', 'fr');
+        } else {
+            localStorage.setItem('lang', 'en');
+        }
+    });
+
+
+    // ============================================
+    // MENU BURGER (Mobile)
+    // ============================================
+
+    const burger = document.getElementById('burger');   // Bouton hamburger
+    const menu = document.getElementById('menu');       // Overlay du menu
 
     if (burger && menu) {
+
+        // Ouvre/ferme le menu au clic sur le burger
         burger.addEventListener('click', () => {
-            menu.classList.toggle('active');
-            burger.classList.toggle('open');
+            menu.classList.toggle('active');    // Affiche/cache le menu
+            burger.classList.toggle('open');    // Animation des lignes
         });
 
+        // Ferme le menu au clic sur un lien
         document.querySelectorAll('.menu-link').forEach(link => {
             link.addEventListener('click', () => {
                 menu.classList.remove('active');
@@ -19,24 +69,46 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // === THEME CLAIR/SOMBRE ===
-const themeBtn = document.getElementById('theme-toggle');
-const themeIcon = themeBtn?.querySelector('.theme-icon');
 
-// Mode sombre par défaut, sauvegarde le choix de l'utilisateur
-const savedTheme = localStorage.getItem('theme') || 'dark';
-document.documentElement.setAttribute('data-theme', savedTheme);
-if (themeIcon) themeIcon.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+    // ============================================
+    // THÈME CLAIR / SOMBRE
+    // ============================================
 
-themeBtn?.addEventListener('click', () => {
-    const current = document.documentElement.getAttribute('data-theme');
-    const next = current === 'dark' ? 'light' : 'dark';
-    document.documentElement.setAttribute('data-theme', next);
-    localStorage.setItem('theme', next); // mémorise le choix
-    if (themeIcon) themeIcon.textContent = next === 'dark' ? '☀️' : '🌙';
-});
+    const themeBtn = document.getElementById('theme-toggle');         // Bouton thème
+    const themeIcon = themeBtn?.querySelector('.theme-icon');         // Icône du bouton
 
-    // === SCROLL FLUIDE ===
+    // Récupère le thème sauvegardé ou utilise "dark" par défaut
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+
+    // Met à jour l'icône selon le thème actuel
+    if (themeIcon) {
+        themeIcon.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+    }
+
+    // Bascule entre thème clair et sombre
+    themeBtn?.addEventListener('click', () => {
+        const current = document.documentElement.getAttribute('data-theme');
+        const next = current === 'dark' ? 'light' : 'dark';
+
+        // Applique le nouveau thème
+        document.documentElement.setAttribute('data-theme', next);
+
+        // Sauvegarde dans localStorage
+        localStorage.setItem('theme', next);
+
+        // Met à jour l'icône
+        if (themeIcon) {
+            themeIcon.textContent = next === 'dark' ? '☀️' : '🌙';
+        }
+    });
+
+
+    // ============================================
+    // SCROLL FLUIDE (Ancres)
+    // ============================================
+
+    /** Anime le scroll vers les ancres (#section) */
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
             e.preventDefault();
@@ -46,19 +118,5 @@ themeBtn?.addEventListener('click', () => {
             }
         });
     });
-
-    // === COULEUR DE FOND AU SCROLL ===
-/*
-    const sections = document.querySelectorAll('[data-color]');
-    const colorObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                document.body.style.backgroundColor = entry.target.dataset.color;
-            }
-        });
-    }, { threshold: 0.5 });
-    sections.forEach(section => colorObserver.observe(section));
-*/
-
 
 });

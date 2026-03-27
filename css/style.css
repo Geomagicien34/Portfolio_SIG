@@ -1,28 +1,48 @@
+/**
+ * ============================================
+ * STYLE.CSS - Portfolio Géomaticien
+ * Feuille de styles principale
+ * ============================================
+ */
+
+/* -------------------------------------------------
+   RESET & BASE
+   ------------------------------------------------- */
+
+/** Reset des marges et padding par défaut */
 *, *::before, *::after {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
+/** Styles de base du body */
 body {
     font-family: sans-serif;
-    background: #0d1117;
-    color: #c9d1d9;
+    background: var(--bg);
+    color: var(--text);
     overflow-x: hidden;
 }
 
+/** Styles des liens */
 a {
-    color: #58a6ff;
+    color: var(--link);
     text-decoration: none;
 }
 
+/** Styles des images */
 img {
     max-width: 100%;
     height: auto;
     display: block;
 }
 
-/* ===== NAV ===== */
+
+/* -------------------------------------------------
+   NAVIGATION (Header fixe)
+   ------------------------------------------------- */
+
+/** Barre de navigation fixe en haut */
 .nav {
     position: fixed;
     top: 0;
@@ -32,447 +52,23 @@ img {
     padding: 1rem 2rem;
 }
 
-.menu-overlay {
+/** Conteneur des boutons (burger, langue, thème) */
+.nav-container {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
     position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    background: rgba(10, 15, 40, 0.97);
-    z-index: 99;
-    padding: 2rem;
-    display: none;
-}
-
-.menu-overlay.active {
-    display: block;
-}
-
-/* Menu horizontal */
-.menu-list {
-    display: flex;
-    flex-direction: row;
-    gap: 2rem;
-    list-style: none;
-    flex-wrap: wrap;
-}
-
-.menu-link {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 1rem;
-    color: #c9d1d9;
-}
-
-.menu-number {
-    color: #58a6ff;
-    font-size: 0.8rem;
-}
-
-.menu-footer {
-    display: flex;
-    gap: 1.5rem;
-    margin-top: 1.5rem;
-    flex-wrap: wrap;
-}
-
-.social-link {
-    color: #58a6ff;
-    font-size: 0.9rem;
-}
-
-/* ===== HERO ===== */
-.section-hero {
-    min-height: 100vh;
-    background-image: url('../assets/images/arriere_plan_compte_Mastodon.png');
-    background-size: cover;
-    background-position: center top;
-    background-repeat: no-repeat;
-    position: relative;
-    display: flex;
-    align-items: center;
-}
-
-.hero-overlay {
-    position: absolute;
-    inset: 0;
-    background: rgba(5, 10, 35, 0.75);
-}
-
-.hero-content {
-    position: relative;
-    z-index: 2;
-    padding: 6rem 4rem 4rem;
-    max-width: 800px;
-}
-
-.hero-logo {
-    width: 120px;
-    height: auto;
-    margin-bottom: 1.5rem;
-    filter: drop-shadow(0 0 12px #58a6ff88);
-}
-
-.hero-title {
-    font-size: clamp(2.5rem, 6vw, 5rem);
-    font-weight: 800;
-    line-height: 1.1;
-    color: #ffffff;
-    margin-bottom: 1rem;
-    white-space: nowrap;
-}
-
-.title-line {
-    display: inline;
-}
-
-.title-line::after {
-    content: ' ';
-}
-
-.hero-subtitle {
-    font-size: 1.2rem;
-    color: #58a6ff;
-    margin-bottom: 1rem;
-}
-
-.hero-intro {
-    font-size: 1rem;
-    opacity: 0.85;
-    max-width: 600px;
-    line-height: 1.7;
-    margin-bottom: 2rem;
-}
-
-/* Découvrez mes projets */
-.scroll-text {
-    font-weight: bold;
-    font-size: 1rem;
-    color: #58a6ff;
-    display: block;
-    margin-bottom: 0.5rem;
-}
-
-.scroll-divider {
-    border: none;
-    border-top: 1px solid #58a6ff;
-    width: 200px;
-    margin-bottom: 1rem;
-}
-
-.scroll-arrow {
-    color: #58a6ff;
-}
-
-/* ===== PROJETS ===== */
-
-.section-project {
-    padding: 5rem 0;
-    overflow: hidden;
-}
-
-.project-container {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 3rem;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 3rem;
-}
-
-.section-project.reversed .project-container {
-    flex-direction: row-reverse;
-}
-
-.project-visual {
-    flex: 1;
-    min-width: 0;
-}
-
-.project-content {
-    flex: 1;
-    min-width: 0;
-}
-
-.project-image {
-    width: 100%;
-    max-height: 400px;
-    object-fit: cover;
-    border-radius: 8px;
-    display: block;
-}
-
-/* Mobile */
-@media (max-width: 768px) {
-    .project-container {
-        flex-direction: column !important;
-        padding: 0 1.5rem;
-    }
-
-    .project-visual,
-    .project-content {
-        width: 100%;
-    }
-
-    .hero-content {
-        padding: 5rem 1.5rem 3rem;
-    }
-
-    .hero-title {
-        white-space: normal;
-        font-size: 2.5rem;
-    }
+    top: 1.5rem;
+    right: 2rem;
+    z-index: 200;
 }
 
 
+/* -------------------------------------------------
+   MENU BURGER (Mobile)
+   ------------------------------------------------- */
 
-
-/*.section-project {
-    padding: 5rem 0;
-}
-
-.project-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
-    gap: 3rem;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 3rem;
-}
-
-.section-project.reversed .project-container {
-    direction: rtl;
-}
-
-.section-project.reversed .project-content {
-    direction: ltr;
-}
-
-.project-image {
-    width: 100%;
-    max-height: 400px;
-    object-fit: cover;
-    border-radius: 8px;
-}
-
-.project-number {
-    font-size: 0.85rem;
-    color: #58a6ff;
-    font-weight: bold;
-}
-
-.project-title {
-    font-size: 2rem;
-    color: #ffffff;
-    margin: 0.5rem 0 1rem;
-}
-
-.project-description {
-    line-height: 1.7;
-    opacity: 0.85;
-    margin-bottom: 1.5rem;
-}
-
-.project-tags {
-    display: flex;
-    gap: 0.5rem;
-    flex-wrap: wrap;
-    margin-bottom: 1.5rem;
-}
-
-.tag {
-    background: rgba(88, 166, 255, 0.15);
-    color: #58a6ff;
-    padding: 0.3rem 0.8rem;
-    border-radius: 4px;
-    font-size: 0.85rem;
-    border: 1px solid rgba(88, 166, 255, 0.3);
-}
-
-.link-animated {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    color: #58a6ff;
-    font-weight: 500;
-}*/
-
-
-
-
-/* ===== STACK ===== */
-.section-stack {
-    padding: 5rem 3rem;
-    background: #0f172a;
-}
-
-.stack-container {
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.stack-title {
-    font-size: 2.5rem;
-    color: #ffffff;
-    margin-bottom: 3rem;
-    text-align: center;
-}
-
-.stack-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 2rem;
-}
-
-.stack-item {
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(88, 166, 255, 0.2);
-    border-radius: 12px;
-    padding: 2rem;
-}
-
-.stack-item h3 {
-    color: #ffffff;
-    margin: 1rem 0 0.5rem;
-}
-
-/* ===== CONTACT ===== */
-.section-contact {
-    padding: 5rem 3rem;
-    background: #1e293b;
-    text-align: center;
-}
-
-.contact-container {
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-.contact-title {
-    font-size: 3rem;
-    color: #ffffff;
-    margin-bottom: 2rem;
-}
-
-.email-giant {
-    font-size: 1.2rem;
-    color: #58a6ff;
-    display: block;
-    margin-bottom: 2rem;
-}
-
-.contact-links {
-    display: flex;
-    gap: 1.5rem;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin-bottom: 2rem;
-}
-
-.contact-link {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    color: #c9d1d9;
-    border: 1px solid rgba(255,255,255,0.2);
-    padding: 0.5rem 1rem;
-    border-radius: 6px;
-}
-
-.contact-footer {
-    opacity: 0.5;
-    font-size: 0.85rem;
-}
-
-
-
-/* ===== PAGE CV ===== */
-.back-link {
-    display: inline-block;
-    padding: 1rem 2rem;
-    color: #58a6ff;
-    font-size: 1rem;
-}
-
-.cv-section {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 4rem 2rem;
-    background: #0d1117;
-}
-
-.cv-container {
-    text-align: center;
-    max-width: 800px;
-}
-
-.cv-title {
-    font-size: 3rem;
-    color: #ffffff;
-    margin-bottom: 1rem;
-}
-
-.cv-subtitle {
-    color: #8b949e;
-    margin-bottom: 3rem;
-    font-size: 1.1rem;
-}
-
-.cv-cards {
-    display: flex;
-    gap: 2rem;
-    justify-content: center;
-    flex-wrap: wrap;
-}
-
-.cv-card {
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(88, 166, 255, 0.3);
-    border-radius: 16px;
-    padding: 3rem 2rem;
-    width: 250px;
-    text-align: center;
-    color: #c9d1d9;
-    transition: transform 0.3s, border-color 0.3s;
-    text-decoration: none;
-}
-
-.cv-card:hover {
-    transform: translateY(-8px);
-    border-color: #58a6ff;
-}
-
-.cv-flag {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-}
-
-.cv-card h2 {
-    color: #ffffff;
-    margin-bottom: 0.5rem;
-}
-
-.cv-card p {
-    font-size: 0.9rem;
-    opacity: 0.7;
-    margin-bottom: 1.5rem;
-}
-
-.cv-btn {
-    background: #58a6ff;
-    color: #0d1117;
-    padding: 0.6rem 1.2rem;
-    border-radius: 6px;
-    font-weight: bold;
-    font-size: 0.85rem;
-}
-
-
-
+/** Bouton hamburger */
 .burger-btn {
     background: none;
     border: none;
@@ -481,17 +77,19 @@ img {
     display: flex;
     flex-direction: column;
     gap: 5px;
+    z-index: 200;
 }
 
+/** Lignes du burger */
 .burger-btn span {
     display: block;
     width: 28px;
     height: 2px;
-    background: #ffffff;
+    background: var(--text-title);
     transition: 0.3s;
 }
 
-/* Animation du burger */
+/** Animation du burger ouvert (X) */
 .burger-btn.open span:nth-child(1) {
     transform: translateY(7px) rotate(45deg);
 }
@@ -504,96 +102,73 @@ img {
     transform: translateY(-7px) rotate(-45deg);
 }
 
-/* Menu overlay actif */
+/** Overlay du menu (fond sombre) */
 .menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: var(--menu-bg);
+    z-index: 99;
+    padding: 2rem;
+    display: none;
     opacity: 0;
     transition: opacity 0.3s ease;
 }
 
+/** Menu visible */
 .menu-overlay.active {
     display: block;
     opacity: 1;
 }
 
-/*Centrer le carré 'Environnement' dans la stack open source*/
-.stack-grid {
-    justify-items: center;
-}
-
-.stack-item:last-child:nth-child(odd) {
-    grid-column: 1 / -1;
-    max-width: 500px;
-    width: 100%;
-}
-
-/*Centrer le logo et le titre du dernier carré 'Environnement'*/
-
-.stack-item:last-child:nth-child(odd) {
-    text-align: center;
-}
-
-.stack-item:last-child:nth-child(odd) .stack-icon {
+/** Liste des liens du menu */
+.menu-list {
     display: flex;
-    justify-content: center;
+    flex-direction: row;
+    gap: 2rem;
+    list-style: none;
+    flex-wrap: wrap;
 }
 
-/*Aérer le texte dans tous les carrés*/
-/*
-.stack-item p {
-    line-height: 1.8;
-    opacity: 0.85;
-}*/
-
-
-/*Centrer les carrés Stack sur mobile*/
-
-@media (max-width: 768px) {
-    .stack-grid {
-        /* Une seule colonne centrée sur mobile */
-        grid-template-columns: 1fr;
-        max-width: 350px;
-        margin: 0 auto;
-    }
-
-    /* Le dernier carré n'a plus besoin de règle spéciale sur mobile */
-    .stack-item:last-child:nth-child(odd) {
-        grid-column: auto;
-        max-width: 100%;
-    }
-}
-
-/*Menu sur mobile*/
-
-/* Décale le menu overlay pour qu'il commence sous le burger */
-.menu-overlay {
-    padding-top: 2rem;
-    padding: 1.5rem;
-}
-
-/* S'assure que le burger reste au-dessus */
-.burger-btn {
-    z-index: 200; /* plus haut que le menu (z-index: 99) */
-}
-
-
-/*style menu avec bouton thème clair ou foncé*/
-
-/* Bouton thème */
-/* Nav container - aligne les deux boutons côte à côte */
-.nav-container {
+/** Lien du menu */
+.menu-link {
     display: flex;
     align-items: center;
-    gap: 0.8rem;
-    position: fixed;
-    top: 1.5rem;
-    right: 2rem;
-    z-index: 200;
+    gap: 0.5rem;
+    font-size: 1rem;
+    color: var(--menu-text);
 }
 
-/* Bouton langue */
+/** Numéro du lien (01, 02...) */
+.menu-number {
+    color: var(--accent);
+    font-size: 0.8rem;
+}
+
+/** Footer du menu (réseaux sociaux) */
+.menu-footer {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+    flex-wrap: wrap;
+}
+
+/** Lien réseaux sociaux */
+.social-link {
+    color: var(--accent);
+    font-size: 0.9rem;
+}
+
+
+/* -------------------------------------------------
+   BOUTONS THÈME ET LANGUE
+   ------------------------------------------------- */
+
+/** Bouton de changement de langue */
 .lang-btn {
     background: none;
-    border: 1px solid rgba(255,255,255,0.2);
+    border: 1px solid var(--btn-border);
     border-radius: 50%;
     width: 36px;
     height: 36px;
@@ -603,19 +178,20 @@ img {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #c9d1d9;
+    color: var(--text);
     text-decoration: none;
     transition: border-color 0.3s, color 0.3s;
 }
 
 .lang-btn:hover {
-    border-color: #58a6ff;
-    color: #58a6ff;
+    border-color: var(--accent);
+    color: var(--accent);
 }
-/* Bouton thème - plus de position fixed séparée */
+
+/** Bouton de changement de thème */
 .theme-btn {
     background: none;
-    border: 1px solid rgba(255,255,255,0.2);
+    border: 1px solid var(--btn-border);
     border-radius: 50%;
     width: 36px;
     height: 36px;
@@ -627,19 +203,471 @@ img {
     z-index: 200;
 }
 
-/* Burger - plus de position fixed séparée */
-.burger-btn {
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0.5rem;
+
+/* -------------------------------------------------
+   SECTION HERO (Accueil)
+   ------------------------------------------------- */
+
+/** Section hero avec image de fond */
+.section-hero {
+    min-height: 100vh;
+    background-image: url('../assets/images/arriere_plan_compte_Mastodon.png');
+    background-size: cover;
+    background-position: center top;
+    background-repeat: no-repeat;
+    position: relative;
     display: flex;
-    flex-direction: column;
-    gap: 5px;
-    /* Pas de position fixed ici, géré par .nav-burger */
+    align-items: center;
 }
 
-/* Variables mode sombre (défaut) */
+/** Overlay sombre sur l'image */
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: var(--hero-overlay);
+}
+
+/** Contenu du hero */
+.hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 6rem 4rem 4rem;
+    max-width: 800px;
+}
+
+/** Logo du hero */
+.hero-logo {
+    width: 120px;
+    height: auto;
+    margin-bottom: 1.5rem;
+    filter: drop-shadow(0 0 12px rgba(88, 166, 255, 0.5));
+}
+
+/** Titre principal */
+.hero-title {
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-weight: 800;
+    line-height: 1.1;
+    color: var(--text-title);
+    margin-bottom: 1rem;
+    white-space: nowrap;
+}
+
+/** Ligne du titre */
+.title-line {
+    display: inline;
+}
+
+.title-line::after {
+    content: ' ';
+}
+
+/** Sous-titre (stack technique) */
+.hero-subtitle {
+    font-size: 1.2rem;
+    color: var(--accent);
+    margin-bottom: 1rem;
+}
+
+/** Texte d'introduction */
+.hero-intro {
+    font-size: 1rem;
+    color: var(--text);
+    opacity: 0.85;
+    max-width: 600px;
+    line-height: 1.7;
+    margin-bottom: 2rem;
+}
+
+/** Indicateur de défilement */
+.scroll-text {
+    font-weight: bold;
+    font-size: 1rem;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.scroll-divider {
+    border: none;
+    border-top: 1px solid var(--scroll-divider);
+    width: 200px;
+    margin-bottom: 1rem;
+}
+
+.scroll-arrow {
+    color: var(--accent);
+}
+
+
+/* -------------------------------------------------
+   SECTION PROJETS
+   ------------------------------------------------- */
+
+/** Section projet */
+.section-project {
+    padding: 5rem 0;
+    overflow: hidden;
+    background: var(--bg-project);
+}
+
+/** Conteneur du projet (image + texte) */
+.project-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 3rem;
+}
+
+/** Projet inversé (texte à gauche) */
+.section-project.reversed .project-container {
+    flex-direction: row-reverse;
+}
+
+/** Partie visuelle (image) */
+.project-visual {
+    flex: 1;
+    min-width: 0;
+}
+
+/** Partie contenu (texte) */
+.project-content {
+    flex: 1;
+    min-width: 0;
+}
+
+/** Image du projet */
+.project-image {
+    width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+    border-radius: 8px;
+    display: block;
+}
+
+/** Numéro du projet */
+.project-number {
+    font-size: 0.85rem;
+    color: var(--accent);
+    font-weight: bold;
+}
+
+/** Titre du projet */
+.project-title {
+    font-size: 2rem;
+    color: var(--text-title);
+    margin: 0.5rem 0 1rem;
+}
+
+/** Description du projet */
+.project-description {
+    line-height: 1.7;
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+}
+
+/** Tags du projet */
+.project-tags {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+}
+
+/** Tag individuel */
+.tag {
+    background: var(--tag-bg);
+    color: var(--accent);
+    border: 1px solid var(--tag-border);
+    padding: 0.3rem 0.8rem;
+    border-radius: 4px;
+    font-size: 0.85rem;
+}
+
+/** Lien avec flèche animée */
+.link-animated {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--accent);
+    font-weight: 500;
+    transition: gap 0.3s;
+}
+
+
+/* -------------------------------------------------
+   SECTION STACK (Technologies)
+   ------------------------------------------------- */
+
+/** Section stack */
+.section-stack {
+    padding: 5rem 3rem;
+    background: var(--bg-section);
+}
+
+/** Conteneur de la stack */
+.stack-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/** Titre de la stack */
+.stack-title {
+    font-size: 2.5rem;
+    color: var(--text-title);
+    margin-bottom: 3rem;
+    text-align: center;
+}
+
+/** Grille des technologies */
+.stack-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 2rem;
+    justify-items: center;
+}
+
+/** Carte technologie */
+.stack-item {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 2rem;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+/** Dernière carte (Environnement) centrée si nombre impair */
+.stack-item:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+    max-width: 500px;
+    width: 100%;
+    text-align: center;
+}
+
+.stack-item:last-child:nth-child(odd) .stack-icon {
+    display: flex;
+    justify-content: center;
+}
+
+/** Icône de la stack */
+.stack-item .stack-icon svg {
+    stroke: var(--icon-color);
+}
+
+/** Titre de la carte */
+.stack-item h3 {
+    color: var(--text-title);
+    margin: 1rem 0 0.5rem;
+}
+
+/** Texte de la carte */
+.stack-item p {
+    color: var(--text-muted);
+}
+
+
+/* -------------------------------------------------
+   SECTION CONTACT
+   ------------------------------------------------- */
+
+/** Section contact */
+.section-contact {
+    padding: 5rem 3rem;
+    background: var(--bg-project);
+    text-align: center;
+}
+
+/** Conteneur du contact */
+.contact-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/** Titre du contact */
+.contact-title {
+    font-size: 3rem;
+    color: var(--text-title);
+    margin-bottom: 2rem;
+}
+
+/** Email giant */
+.email-giant {
+    font-size: 1.2rem;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 2rem;
+}
+
+/** Liens de contact */
+.contact-links {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+}
+
+/** Lien de contact individuel */
+.contact-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text);
+    border: 1px solid var(--border);
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+}
+
+/** Footer du contact */
+.contact-footer {
+    color: var(--text-muted);
+    opacity: 0.5;
+    font-size: 0.85rem;
+}
+
+
+/* -------------------------------------------------
+   PAGE CV
+   ------------------------------------------------- */
+
+/** Section CV */
+.cv-section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 2rem;
+    background: var(--bg);
+}
+
+/** Conteneur du CV */
+.cv-container {
+    text-align: center;
+    max-width: 800px;
+}
+
+/** Titre du CV */
+.cv-title {
+    font-size: 3rem;
+    color: var(--text-title);
+    margin-bottom: 1rem;
+}
+
+/** Sous-titre du CV */
+.cv-subtitle {
+    color: var(--text-muted);
+    margin-bottom: 3rem;
+    font-size: 1.1rem;
+}
+
+/** Grille des cartes CV */
+.cv-cards {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    flex-wrap: nowrap;
+    align-items: stretch;
+}
+
+/** Carte CV (FR ou EN) */
+.cv-card {
+    background: var(--card-bg);
+    border: 1px solid rgba(88, 166, 255, 0.3);
+    border-radius: 16px;
+    padding: 2rem 1.5rem;
+    width: 240px;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+    color: var(--text);
+    transition: transform 0.3s, border-color 0.3s;
+    text-decoration: none;
+}
+
+.cv-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--accent);
+}
+
+/** Contenu de la carte (rassemble les textes) */
+.cv-card > * {
+    margin-bottom: 0.3rem;
+}
+
+.cv-card > *:last-child {
+    margin-bottom: 0;
+}
+
+/** Drapeau */
+.cv-flag {
+    font-size: 3.5rem;
+    margin-bottom: 0.3rem;
+}
+
+.cv-card h2 {
+    color: var(--text-title);
+    font-size: 1.4rem;
+}
+
+.cv-card p {
+    font-size: 0.95rem;
+    opacity: 0.7;
+}
+
+/** Bouton de téléchargement */
+.cv-btn {
+    background: var(--accent);
+    color: var(--bg);
+    padding: 0.7rem 1.3rem;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 1rem;
+    width: 100%;
+    margin-top: auto;
+}
+
+
+/* -------------------------------------------------
+   CURSEUR PERSONNALISÉ
+   ------------------------------------------------- */
+
+/** Curseur principal */
+.cursor {
+    width: 8px;
+    height: 8px;
+    background: var(--cursor-color);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.1s;
+}
+
+/** Cercle suiveur */
+.cursor-follower {
+    width: 30px;
+    height: 30px;
+    border: 1px solid var(--cursor-color);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9998;
+    transition: transform 0.3s, opacity 0.3s;
+    opacity: 0.5;
+}
+
+
+/* -------------------------------------------------
+   VARIABLES CSS (Thèmes)
+   ------------------------------------------------- */
+
+/** Thème sombre (défaut) */
 :root, [data-theme="dark"] {
     --bg: #0d1117;
     --bg-section: #0f172a;
@@ -663,7 +691,7 @@ img {
     --icon-color: #c9d1d9;
 }
 
-/* Variables mode clair */
+/** Thème clair */
 [data-theme="light"] {
     --bg: #f6f8fa;
     --bg-section: #eef1f5;
@@ -687,158 +715,92 @@ img {
     --icon-color: #57606a;
 }
 
-/* Applique les variables partout */
-body {
-    background: var(--bg);
-    color: var(--text);
-}
 
-a {
-    color: var(--link);
-}
+/* -------------------------------------------------
+   RESPONSIVE (Mobile)
+   ------------------------------------------------- */
 
-.hero-overlay {
-    background: var(--hero-overlay);
-}
+@media (max-width: 768px) {
 
-.hero-title,
-.project-title,
-.contact-title,
-.stack-title,
-.stack-item h3 {
-    color: var(--text-title);
-}
+    /** Hero */
+    .hero-content {
+        padding: 5rem 1.5rem 3rem;
+    }
 
-.section-project {
-    background: var(--bg-project) !important;
-}
+    .hero-title {
+        white-space: normal;
+        font-size: 2.5rem;
+    }
 
-.section-stack {
-    background: var(--bg-section) !important;
-}
+    /** Projets */
+    .project-container {
+        flex-direction: column !important;
+        padding: 0 1.5rem;
+        gap: 1.5rem;
+    }
 
-.section-contact {
-    background: var(--bg-project) !important;
-}
+    .project-visual,
+    .project-content {
+        width: 100%;
+    }
 
-.stack-item {
-    background: var(--card-bg);
-    border-color: var(--border);
-}
+    .project-image {
+        max-height: 250px;
+    }
 
-.menu-overlay {
-    background: var(--menu-bg);
-}
+    .project-title {
+        font-size: 1.5rem;
+        margin: 0.3rem 0 0.8rem;
+    }
 
-.menu-link {
-    color: var(--menu-text);
-}
+    .project-description {
+        font-size: 0.95rem;
+        margin-bottom: 1rem;
+    }
 
-.menu-number {
-    color: var(--accent);
-}
+    /** Stack */
+    .stack-grid {
+        grid-template-columns: 1fr;
+        max-width: 350px;
+        margin: 0 auto;
+        justify-items: center;
+    }
 
-.hero-subtitle,
-.scroll-text {
-    color: var(--accent);
-}
+    .stack-item {
+        text-align: center;
+    }
 
-.scroll-divider {
-    border-color: var(--scroll-divider);
-}
+    .stack-item:last-child:nth-child(odd) {
+        grid-column: auto;
+        max-width: 100%;
+    }
 
-.scroll-arrow {
-    color: var(--accent);
-}
+    .stack-icon {
+        display: flex;
+        justify-content: center;
+    }
 
-.tag {
-    background: var(--tag-bg);
-    color: var(--accent);
-    border-color: var(--tag-border);
-}
+    /** CV */
+    .cv-cards {
+        flex-direction: column;
+        align-items: center;
+    }
 
-.link-animated {
-    color: var(--accent);
-}
+    .cv-card {
+        width: 100%;
+        max-width: 280px;
+    }
 
-.contact-link {
-    color: var(--text);
-    border-color: var(--border);
-}
+    /** Menu mobile */
+    .menu-overlay {
+        padding-top: 2rem;
+        padding: 1.5rem;
+        z-index: 300;
+    }
 
-.contact-footer {
-    color: var(--text-muted);
-}
-
-.project-description,
-.stack-item p,
-.cv-subtitle,
-.cv-card p {
-    color: var(--text-muted);
-}
-
-.stack-icon svg {
-    stroke: var(--icon-color);
-}
-
-.cv-card {
-    background: var(--card-bg);
-    border-color: var(--border);
-    color: var(--text);
-}
-
-.cv-card h2 {
-    color: var(--text-title);
-}
-
-.cv-btn {
-    background: var(--accent);
-}
-
-.burger-btn span {
-    background: var(--text-title);
-}
-
-.lang-btn {
-    border-color: var(--btn-border);
-    color: var(--text);
-}
-
-.lang-btn:hover {
-    border-color: var(--accent);
-    color: var(--accent);
-}
-
-.theme-btn {
-    border-color: var(--btn-border);
-}
-
-.cursor {
-    background: var(--cursor-color);
-}
-
-.cursor-follower {
-    border-color: var(--cursor-color);
-}
-
-.social-link {
-    color: var(--accent);
-}
-
-.project-number {
-    color: var(--accent);
-}
-
-.project-tags {
-    color: var(--accent);
-}
-
-.tag:hover {
-    background: var(--accent);
-    color: var(--bg);
-}
-
-.hero-intro {
-    color: var(--text);
-    opacity: 0.85;
+    /** Curseur désactivé sur mobile */
+    .cursor,
+    .cursor-follower {
+        display: none !important;
+    }
 }
