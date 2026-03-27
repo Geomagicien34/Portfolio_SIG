@@ -1,18 +1,18 @@
 <!DOCTYPE html>
-<html lang="fr" data-theme="dark">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Geomagicien - Géomaticien Open Source</title>
-    <link rel="icon" type="image/png" href="assets/images/logo_geomatique.png">
-    <meta name="description" content="Portfolio géomatique - QGIS/ESRI, PostgreSQL avec postgis, OpenLayers, Geoserver, Python">
+    <title>Geomagicien - Open Source Geomatician</title>
+    <link rel="icon" type="image/png" href="../../assets/images/logo_geomatique.png">
+    <meta name="description" content="Geomatic portfolio - QGIS/ESRI, PostgreSQL with PostGIS, OpenLayers, Geoserver, Python">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v8.2.0/ol.css">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/animations.css">
-    <meta property="og:title" content="Geomagicien - Géomaticien Open Source">
-    <meta property="og:description" content="Portfolio géomatique - QGIS, PostGIS, OpenLayers, Python, R">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/animations.css">
+    <meta property="og:title" content="Geomagicien - Open Source Geomatician">
+    <meta property="og:description" content="Geomatic portfolio - QGIS, PostGIS, OpenLayers, Python, R">
     <meta property="og:image" content="https://geomagicien.codeberg.page/Portfolio_SIG/assets/images/logo_geomatique.png">
-    <meta property="og:url" content="https://geomagicien.codeberg.page/Portfolio_SIG/">
+    <meta property="og:url" content="https://geomagicien.codeberg.page/Portfolio_SIG/site/en/">
     <meta property="og:type" content="website">
 </head>
 <body>
@@ -26,8 +26,8 @@
                 <span></span>
                 <span></span>
             </button>
-            <a href="site/en/index.html" class="lang-btn">EN</a>
-            <button id="theme-toggle" class="theme-btn" title="Changer le thème">
+            <a href="../../index.html" class="lang-btn">FR</a>
+            <button id="theme-toggle" class="theme-btn" title="Toggle theme">
                 <span class="theme-icon">☀️</span>
             </button>
         </div>
@@ -38,19 +38,19 @@
                 <li class="menu-item">
                     <a href="#hero" class="menu-link">
                         <span class="menu-number">01</span>
-                        <span class="menu-text">Accueil</span>
+                        <span class="menu-text">Home</span>
                     </a>
                 </li>
                 <li class="menu-item">
                     <a href="#projects" class="menu-link">
                         <span class="menu-number">02</span>
-                        <span class="menu-text">Projets</span>
+                        <span class="menu-text">Projects</span>
                     </a>
                 </li>
                 <li class="menu-item">
                     <a href="#stack" class="menu-link">
                         <span class="menu-number">03</span>
-                        <span class="menu-text">Stack OSGeo</span>
+                        <span class="menu-text">OSGeo Stack</span>
                     </a>
                 </li>
                 <li class="menu-item">
@@ -59,9 +59,8 @@
                         <span class="menu-text">Contact</span>
                     </a>
                 </li>
-                <!-- Dans .menu-list, après Contact -->
                 <li class="menu-item">
-                    <a href="site/cv.html" class="menu-link">
+                    <a href="../cv.html" class="menu-link">
                         <span class="menu-number">05</span>
                         <span class="menu-text">CV</span>
                     </a>
@@ -83,16 +82,16 @@
         <div class="hero-overlay"></div>
         <div class="hero-content">
             <div class="hero-text">
-                <img src="assets/images/logo_geomatique.png" alt="Logo Géomaticien" class="hero-logo">
+                <img src="../../assets/images/logo_geomatique.png" alt="Geomatician Logo" class="hero-logo">
                 <h1 class="hero-title">
-                    <span class="title-line">Géomaticien</span>
                     <span class="title-line">Open Source</span>
+                    <span class="title-line">Geomatician</span>
                 </h1>
                 <p class="hero-subtitle">QGIS • PostGIS • OpenLayers • Python • R</p>
-                <p class="hero-intro">Géomaticien passionné de nouvelles technologies, de cartographies, webmapping, programmations et d'open source (FOSS). J'explore, analyse et visualise le territoire avec des outils libres.</p>
+                <p class="hero-intro">Geomatician passionate about new technologies, cartography, webmapping, programming and open source (FOSS). I explore, analyze and visualize territory with free tools.</p>
             </div>
             <div class="scroll-indicator">
-                <span class="scroll-text"><strong>Découvrez mes projets</strong></span>
+                <span class="scroll-text"><strong>Discover my projects</strong></span>
                 <hr class="scroll-divider">
                 <div class="scroll-arrow">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -107,15 +106,15 @@
         <div class="project-container">
             <div class="project-visual">
                 <div class="project-image-wrapper">
-                    <img src="assets/images/plugin_proxisante_QGIS.png" alt="Plugin QGIS" class="project-image">
+                    <img src="../../assets/images/plugin_proxisante_QGIS.png" alt="QGIS Plugin" class="project-image">
                 </div>
             </div>
             <div class="project-content">
                 <span class="project-number">01.</span>
-                <h2 class="project-title">Plugin QGIS</h2>
+                <h2 class="project-title">QGIS Plugin</h2>
                 <p class="project-description">
-                    Automatisation des traitements géospatiaux pour accélérer 
-                    les workflows SIG récurrents. Interface Qt intuitive.
+                    Automation of geospatial processing to accelerate 
+                    recurring GIS workflows. Intuitive Qt interface.
                 </p>
                 <div class="project-tags">
                     <span class="tag">Python</span>
@@ -124,7 +123,7 @@
                 </div>
                 <div class="project-links">
                     <a href="https://codeberg.org/Geomagicien/qgis-plugin" class="link-animated">
-                        <span>Voir le code</span>
+                        <span>View code</span>
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
                             <path d="M5 12h14m0 0l-7-7m7 7l-7 7" stroke="currentColor" stroke-width="2"/>
                         </svg>
@@ -138,10 +137,10 @@
         <div class="project-container">
             <div class="project-content">
                 <span class="project-number">02.</span>
-                <h2 class="project-title">WebMapping Interactif</h2>
+                <h2 class="project-title">Interactive WebMapping</h2>
                 <p class="project-description">
-                    Application de cartographie web avec données PostGIS servies 
-                    via GeoServer WFS. Recherche spatiale et filtres avancés.
+                    Web cartography application with PostGIS data served 
+                    via GeoServer WFS. Spatial search and advanced filters.
                 </p>
                 <div class="project-tags">
                     <span class="tag">JavaScript</span>
@@ -150,7 +149,7 @@
                 </div>
                 <div class="project-links">
                     <a href="https://codeberg.org/Geomagicien/webmap" class="link-animated">
-                        <span>Voir le code</span>
+                        <span>View code</span>
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
                             <path d="M5 12h14m0 0l-7-7m7 7l-7 7" stroke="currentColor" stroke-width="2"/>
                         </svg>
@@ -159,7 +158,7 @@
             </div>
             <div class="project-visual">
                 <div class="project-image-wrapper">
-                    <img src="assets/images/page_web_finale_projet_webmapping_cinema_France.png" alt="WebMapping" class="project-image">
+                    <img src="../../assets/images/page_web_finale_projet_webmapping_cinema_France.png" alt="WebMapping" class="project-image">
                 </div>
             </div>
         </div>
@@ -169,15 +168,15 @@
         <div class="project-container">
             <div class="project-visual">
                 <div class="project-image-wrapper">
-                    <img src="assets/images/pgAdmin_postgis.png" alt="PostGIS" class="project-image">
+                    <img src="../../assets/images/pgAdmin_postgis.png" alt="PostGIS" class="project-image">
                 </div>
             </div>
             <div class="project-content">
                 <span class="project-number">03.</span>
-                <h2 class="project-title">Scripts PostGIS</h2>
+                <h2 class="project-title">PostGIS Scripts</h2>
                 <p class="project-description">
-                    Collection de requêtes SQL spatiales optimisées pour analyses 
-                    territoriales complexes et traitements de données massives.
+                    Collection of optimized spatial SQL queries for complex 
+                    territorial analysis and massive data processing.
                 </p>
                 <div class="project-tags">
                     <span class="tag">SQL</span>
@@ -186,7 +185,7 @@
                 </div>
                 <div class="project-links">
                     <a href="https://codeberg.org/Geomagicien/postgis-scripts" class="link-animated">
-                        <span>Voir le code</span>
+                        <span>View code</span>
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
                             <path d="M5 12h14m0 0l-7-7m7 7l-7 7" stroke="currentColor" stroke-width="2"/>
                         </svg>
@@ -198,7 +197,7 @@
     
     <section id="stack" class="section-stack" data-color="#0f172a">
         <div class="stack-container">
-            <h2 class="stack-title">Stack Open Source</h2>
+            <h2 class="stack-title">Open Source Stack</h2>
             <div class="stack-grid">
                 <div class="stack-item">
                     <div class="stack-icon">
@@ -206,7 +205,7 @@
                             <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" stroke="currentColor" stroke-width="2"/>
                         </svg>
                     </div>
-                    <h3>SIG Desktop</h3>
+                    <h3>Desktop GIS</h3>
                     <p>QGIS • GRASS GIS • GDAL</p>
                 </div>
                 <div class="stack-item">
@@ -215,7 +214,7 @@
                             <path d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4" stroke="currentColor" stroke-width="2"/>
                         </svg>
                     </div>
-                    <h3>Bases Spatiales</h3>
+                    <h3>Spatial Databases</h3>
                     <p>PostgreSQL/PostGIS • SpatiaLite • Geoserver</p>
                 </div>
                 <div class="stack-item">
@@ -235,7 +234,7 @@
                             <path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" stroke="currentColor" stroke-width="2"/>
                         </svg>
                     </div>
-                    <h3>Développement</h3>
+                    <h3>Development</h3>
                     <p>Python • R (sf) • JavaScript • PHP • Git • VSCodium • RStudio</p>
                 </div>
                 <div class="stack-item">
@@ -249,7 +248,7 @@
                             <circle cx="18" cy="19" r="1" fill="currentColor"/>
                         </svg>
                     </div>
-                    <h3>Environnement</h3>
+                    <h3>Environment</h3>
                     <p>Apache Web Server HTTPS • JDK Java Eclipse Temurin (Adoptium) • Mozilla Firefox</p>
                 </div>
             </div>
@@ -259,8 +258,8 @@
     <section id="contact" class="section-contact" data-color="#1e293b">
         <div class="contact-container">
             <h2 class="contact-title">
-                <span class="title-line">Travaillons</span>
-                <span class="title-line">ensemble</span>
+                <span class="title-line">Let's work</span>
+                <span class="title-line">together</span>
             </h2>
             <a href="mailto:etudes.geomatique@ikmail.com" class="email-giant">etudes.geomatique@ikmail.com</a>
             <div class="contact-links">
@@ -296,14 +295,14 @@
                 </a>
             </div>
             <div class="contact-footer">
-                <p>Hébergé sur Codeberg • 100% Open Source</p>
+                <p>Hosted on Codeberg • 100% Open Source</p>
             </div>
         </div>
     </section>
     
     <script src="https://cdn.jsdelivr.net/npm/ol@v8.2.0/dist/ol.js"></script>
-    <script src="js/animations.js"></script>
-    <script src="js/map.js"></script>
-    <script src="js/main.js"></script>
+    <script src="../../js/animations.js"></script>
+    <script src="../../js/map.js"></script>
+    <script src="../../js/main.js"></script>
 </body>
 </html>

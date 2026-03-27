@@ -481,10 +481,6 @@ img {
     display: flex;
     flex-direction: column;
     gap: 5px;
-    position: fixed;
-    top: 1.5rem;
-    right: 2rem;
-    z-index: 200;
 }
 
 .burger-btn span {
@@ -547,3 +543,302 @@ img {
     line-height: 1.8;
     opacity: 0.85;
 }*/
+
+
+/*Centrer les carrés Stack sur mobile*/
+
+@media (max-width: 768px) {
+    .stack-grid {
+        /* Une seule colonne centrée sur mobile */
+        grid-template-columns: 1fr;
+        max-width: 350px;
+        margin: 0 auto;
+    }
+
+    /* Le dernier carré n'a plus besoin de règle spéciale sur mobile */
+    .stack-item:last-child:nth-child(odd) {
+        grid-column: auto;
+        max-width: 100%;
+    }
+}
+
+/*Menu sur mobile*/
+
+/* Décale le menu overlay pour qu'il commence sous le burger */
+.menu-overlay {
+    padding-top: 2rem;
+    padding: 1.5rem;
+}
+
+/* S'assure que le burger reste au-dessus */
+.burger-btn {
+    z-index: 200; /* plus haut que le menu (z-index: 99) */
+}
+
+
+/*style menu avec bouton thème clair ou foncé*/
+
+/* Bouton thème */
+/* Nav container - aligne les deux boutons côte à côte */
+.nav-container {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    position: fixed;
+    top: 1.5rem;
+    right: 2rem;
+    z-index: 200;
+}
+
+/* Bouton langue */
+.lang-btn {
+    background: none;
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #c9d1d9;
+    text-decoration: none;
+    transition: border-color 0.3s, color 0.3s;
+}
+
+.lang-btn:hover {
+    border-color: #58a6ff;
+    color: #58a6ff;
+}
+/* Bouton thème - plus de position fixed séparée */
+.theme-btn {
+    background: none;
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    cursor: pointer;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 200;
+}
+
+/* Burger - plus de position fixed séparée */
+.burger-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    /* Pas de position fixed ici, géré par .nav-burger */
+}
+
+/* Variables mode sombre (défaut) */
+:root, [data-theme="dark"] {
+    --bg: #0d1117;
+    --bg-section: #0f172a;
+    --bg-project: #1a2332;
+    --text: #c9d1d9;
+    --text-title: #ffffff;
+    --text-muted: #8b949e;
+    --border: rgba(88, 166, 255, 0.2);
+    --card-bg: rgba(255,255,255,0.05);
+    --accent: #58a6ff;
+    --accent-hover: #79b8ff;
+    --link: #58a6ff;
+    --menu-bg: rgba(10, 15, 40, 0.97);
+    --menu-text: #c9d1d9;
+    --hero-overlay: rgba(5, 10, 35, 0.75);
+    --tag-bg: rgba(88, 166, 255, 0.15);
+    --tag-border: rgba(88, 166, 255, 0.3);
+    --btn-border: rgba(255,255,255,0.2);
+    --cursor-color: #38bdf8;
+    --scroll-divider: #58a6ff;
+    --icon-color: #c9d1d9;
+}
+
+/* Variables mode clair */
+[data-theme="light"] {
+    --bg: #f6f8fa;
+    --bg-section: #eef1f5;
+    --bg-project: #dde3ec;
+    --text: #24292f;
+    --text-title: #0d1117;
+    --text-muted: #57606a;
+    --border: rgba(0, 80, 200, 0.2);
+    --card-bg: rgba(0,0,0,0.03);
+    --accent: #0969da;
+    --accent-hover: #0550ae;
+    --link: #0969da;
+    --menu-bg: rgba(246, 248, 250, 0.98);
+    --menu-text: #24292f;
+    --hero-overlay: rgba(255, 255, 255, 0.75);
+    --tag-bg: rgba(9, 105, 218, 0.1);
+    --tag-border: rgba(9, 105, 218, 0.3);
+    --btn-border: rgba(0,0,0,0.2);
+    --cursor-color: #0969da;
+    --scroll-divider: #0969da;
+    --icon-color: #57606a;
+}
+
+/* Applique les variables partout */
+body {
+    background: var(--bg);
+    color: var(--text);
+}
+
+a {
+    color: var(--link);
+}
+
+.hero-overlay {
+    background: var(--hero-overlay);
+}
+
+.hero-title,
+.project-title,
+.contact-title,
+.stack-title,
+.stack-item h3 {
+    color: var(--text-title);
+}
+
+.section-project {
+    background: var(--bg-project) !important;
+}
+
+.section-stack {
+    background: var(--bg-section) !important;
+}
+
+.section-contact {
+    background: var(--bg-project) !important;
+}
+
+.stack-item {
+    background: var(--card-bg);
+    border-color: var(--border);
+}
+
+.menu-overlay {
+    background: var(--menu-bg);
+}
+
+.menu-link {
+    color: var(--menu-text);
+}
+
+.menu-number {
+    color: var(--accent);
+}
+
+.hero-subtitle,
+.scroll-text {
+    color: var(--accent);
+}
+
+.scroll-divider {
+    border-color: var(--scroll-divider);
+}
+
+.scroll-arrow {
+    color: var(--accent);
+}
+
+.tag {
+    background: var(--tag-bg);
+    color: var(--accent);
+    border-color: var(--tag-border);
+}
+
+.link-animated {
+    color: var(--accent);
+}
+
+.contact-link {
+    color: var(--text);
+    border-color: var(--border);
+}
+
+.contact-footer {
+    color: var(--text-muted);
+}
+
+.project-description,
+.stack-item p,
+.cv-subtitle,
+.cv-card p {
+    color: var(--text-muted);
+}
+
+.stack-icon svg {
+    stroke: var(--icon-color);
+}
+
+.cv-card {
+    background: var(--card-bg);
+    border-color: var(--border);
+    color: var(--text);
+}
+
+.cv-card h2 {
+    color: var(--text-title);
+}
+
+.cv-btn {
+    background: var(--accent);
+}
+
+.burger-btn span {
+    background: var(--text-title);
+}
+
+.lang-btn {
+    border-color: var(--btn-border);
+    color: var(--text);
+}
+
+.lang-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+.theme-btn {
+    border-color: var(--btn-border);
+}
+
+.cursor {
+    background: var(--cursor-color);
+}
+
+.cursor-follower {
+    border-color: var(--cursor-color);
+}
+
+.social-link {
+    color: var(--accent);
+}
+
+.project-number {
+    color: var(--accent);
+}
+
+.project-tags {
+    color: var(--accent);
+}
+
+.tag:hover {
+    background: var(--accent);
+    color: var(--bg);
+}
+
+.hero-intro {
+    color: var(--text);
+    opacity: 0.85;
+}

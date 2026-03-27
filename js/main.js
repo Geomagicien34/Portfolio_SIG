@@ -19,6 +19,23 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // === THEME CLAIR/SOMBRE ===
+const themeBtn = document.getElementById('theme-toggle');
+const themeIcon = themeBtn?.querySelector('.theme-icon');
+
+// Mode sombre par défaut, sauvegarde le choix de l'utilisateur
+const savedTheme = localStorage.getItem('theme') || 'dark';
+document.documentElement.setAttribute('data-theme', savedTheme);
+if (themeIcon) themeIcon.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+
+themeBtn?.addEventListener('click', () => {
+    const current = document.documentElement.getAttribute('data-theme');
+    const next = current === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    localStorage.setItem('theme', next); // mémorise le choix
+    if (themeIcon) themeIcon.textContent = next === 'dark' ? '☀️' : '🌙';
+});
+
     // === SCROLL FLUIDE ===
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
