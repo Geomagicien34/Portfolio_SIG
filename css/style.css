@@ -122,6 +122,25 @@ img {
     opacity: 1;
 }
 
+/** Bouton fermer le menu (mobile uniquement) */
+.menu-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    color: var(--menu-text);
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    z-index: 301;
+    display: none;
+}
+
+.menu-close:hover {
+    color: var(--accent);
+}
+
 /** Liste des liens du menu */
 .menu-list {
     display: flex;
@@ -201,6 +220,11 @@ img {
     align-items: center;
     justify-content: center;
     z-index: 200;
+    transition: border-color 0.3s, color 0.3s;
+}
+
+.theme-btn:hover {
+    border-color: var(--accent);
 }
 
 
@@ -744,6 +768,14 @@ img {
         width: 100%;
     }
 
+    .section-project.reversed .project-container {
+        flex-direction: column !important;
+    }
+
+    .section-project.reversed .project-container .project-visual {
+        order: -1;
+    }
+
     .project-image {
         max-height: 250px;
     }
@@ -796,6 +828,11 @@ img {
         padding-top: 2rem;
         padding: 1.5rem;
         z-index: 300;
+    }
+
+    /** Bouton fermer visible sur mobile */
+    .menu-close {
+        display: block;
     }
 
     /** Curseur désactivé sur mobile */

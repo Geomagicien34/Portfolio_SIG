@@ -50,6 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const burger = document.getElementById('burger');   // Bouton hamburger
     const menu = document.getElementById('menu');       // Overlay du menu
+    const menuClose = document.getElementById('menu-close'); // Bouton fermer
 
     if (burger && menu) {
 
@@ -57,6 +58,12 @@ document.addEventListener('DOMContentLoaded', () => {
         burger.addEventListener('click', () => {
             menu.classList.toggle('active');    // Affiche/cache le menu
             burger.classList.toggle('open');    // Animation des lignes
+        });
+
+        // Ferme le menu au clic sur le bouton fermer
+        menuClose?.addEventListener('click', () => {
+            menu.classList.remove('active');
+            burger.classList.remove('open');
         });
 
         // Ferme le menu au clic sur un lien
