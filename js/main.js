@@ -52,29 +52,26 @@ document.addEventListener('DOMContentLoaded', () => {
     const menu = document.getElementById('menu');       // Overlay du menu
     const menuClose = document.getElementById('menu-close'); // Bouton fermer
 
-    if (burger && menu) {
+    // Ouvre/ferme le menu au clic sur le burger
+    burger?.addEventListener('click', () => {
+        menu.classList.toggle('active');
+        burger.classList.toggle('open');
+    });
 
-        // Ouvre/ferme le menu au clic sur le burger
-        burger.addEventListener('click', () => {
-            menu.classList.toggle('active');    // Affiche/cache le menu
-            burger.classList.toggle('open');    // Animation des lignes
-        });
+    // Ferme le menu au clic sur le bouton fermer
+    menuClose?.addEventListener('click', () => {
+        menu.classList.remove('active');
+        burger?.classList.remove('open');
+    });
 
-        // Ferme le menu au clic sur le bouton fermer
-        menuClose?.addEventListener('click', () => {
+    // Ferme le menu au clic sur un lien
+    document.querySelectorAll('.menu-link').forEach(link => {
+        link.addEventListener('click', () => {
             menu.classList.remove('active');
-            burger.classList.remove('open');
+            burger?.classList.remove('open');
+            document.body.style.overflow = '';
         });
-
-        // Ferme le menu au clic sur un lien
-        document.querySelectorAll('.menu-link').forEach(link => {
-            link.addEventListener('click', () => {
-                menu.classList.remove('active');
-                burger.classList.remove('open');
-                document.body.style.overflow = '';
-            });
-        });
-    }
+    });
 
 
     // ============================================
