@@ -1,6 +1,6 @@
 # Portfolio Géomatique Open Source
 
-Portfolio de géomaticien avec stack OSGeo (libre et Open Source).
+Portfolio de Geomagicien: géomaticien avec stack OSGeo (libre et Open Source).
 
 ## 🌐 Site
 
@@ -8,23 +8,26 @@ Geomagicien.codeberg.page (https://geomagicien.codeberg.page/Portfolio_SIG/)
 
 ## 🛠️ Stack
 
-- HTML, CSS, JavaScript, HTML, PHP
+- HTML, CSS, JavaScript, PHP
 - OpenLayers, Leaflet
+- Apache Server
+- PostgreSQL
+- Geoserver
 - Codeberg Pages
 - Miroir GitHub automatique
 
 ## 📦 Projets
 
-1. Plugin QGIS - Automatisation SIG
+1. Plugin QGIS - Automatisation de Workflows SIG avec modeleur graphique
 2. WebMapping - OpenLayers + PostGIS
-3. Scripts PostGIS - Analyses SQL
-4. Quarto et R avec RStudio
+3. Scripts PostGIS - Analyses SQL des bases de données avec schéma conceptuel de données (MCD) et modèle relationnel avec clés primaires / étrangères (MLD)
+4. Quarto et R avec RStudio - Cartographie et analyses de données scientifiques via RStudio
 
 ## 🤝 Philosophie
 
-- 100% open source
+- 100% open source et indépendant
 - Hébergé en Europe
-- Zéro tracking
+- Zéro tracking (RGPD)
 
 ## 📧 Contact
 
