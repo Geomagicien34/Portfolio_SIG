@@ -1,17 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Spatial Databases - Geomatician</title>
     <link rel="icon" type="image/png" href="../../assets/images/logo_geomatique.png">
     <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/animations.css">
+    <script src="../../js/main.js" defer></script>
     <style>
         /* ===== PAGE SPECIFIC STYLES ===== */
 
         /* Page background */
         body {
-            background: #0d1117;
+            background: var(--bg);
         }
 
         /* Page hero section */
@@ -23,12 +25,13 @@
 
         .page-hero h1 {
             font-size: clamp(2rem, 5vw, 3.5rem);
-            color: #ffffff;
+            color: var(--text-title);
             margin-bottom: 1rem;
         }
 
         .page-hero p {
             font-size: 1.1rem;
+            color: var(--text);
             opacity: 0.8;
             max-width: 700px;
             line-height: 1.7;
@@ -37,9 +40,9 @@
         /* Tag badge at top */
         .page-tag {
             display: inline-block;
-            background: rgba(88, 166, 255, 0.15);
-            color: #58a6ff;
-            border: 1px solid rgba(88, 166, 255, 0.3);
+            background: var(--tag-bg);
+            color: var(--accent);
+            border: 1px solid var(--tag-border);
             padding: 0.3rem 0.8rem;
             border-radius: 4px;
             font-size: 0.85rem;
@@ -51,12 +54,12 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 3rem;
-            border-top: 1px solid rgba(255,255,255,0.08);
+            border-top: 1px solid var(--border);
         }
 
         .content-section h2 {
             font-size: 1.8rem;
-            color: #ffffff;
+            color: var(--text-title);
             margin-bottom: 0.5rem;
             display: flex;
             align-items: center;
@@ -65,12 +68,13 @@
 
         /* Section number */
         .section-num {
-            color: #58a6ff;
+            color: var(--accent);
             font-size: 1rem;
             font-weight: normal;
         }
 
         .content-section p {
+            color: var(--text);
             opacity: 0.8;
             line-height: 1.7;
             margin-bottom: 1.5rem;
@@ -82,7 +86,7 @@
             width: 100%;
             max-width: 800px;
             border-radius: 12px;
-            border: 1px solid rgba(88, 166, 255, 0.2);
+            border: 1px solid var(--border);
             margin: 1.5rem 0;
             transition: transform 0.3s, box-shadow 0.3s;
             cursor: zoom-in;
@@ -96,7 +100,7 @@
         /* Image caption */
         .img-caption {
             font-size: 0.85rem;
-            color: #8b949e;
+            color: var(--text-muted);
             margin-top: -1rem;
             margin-bottom: 2rem;
             font-style: italic;
@@ -112,21 +116,21 @@
 
         /* Card for each relational table */
         .table-card {
-            background: rgba(255,255,255,0.04);
-            border: 1px solid rgba(88, 166, 255, 0.2);
+            background: var(--card-bg);
+            border: 1px solid var(--border);
             border-radius: 12px;
             overflow: hidden;
         }
 
         /* Card header with table name */
         .table-card-header {
-            background: rgba(88, 166, 255, 0.1);
+            background: var(--tag-bg);
             padding: 0.8rem 1.2rem;
-            border-bottom: 1px solid rgba(88, 166, 255, 0.2);
+            border-bottom: 1px solid var(--border);
         }
 
         .table-card-header h3 {
-            color: #58a6ff;
+            color: var(--accent);
             font-size: 1rem;
             margin: 0;
             font-family: monospace;
@@ -142,7 +146,7 @@
             align-items: center;
             gap: 0.5rem;
             padding: 0.3rem 0;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
+            border-bottom: 1px solid var(--border);
             font-size: 0.9rem;
             font-family: monospace;
         }
@@ -151,7 +155,7 @@
             border-bottom: none;
         }
 
-        /* Primary key badge */
+        /* Primary key badge - keep colors fixed for readability */
         .badge-pk {
             background: #f59e0b;
             color: #0d1117;
@@ -185,20 +189,20 @@
         }
 
         .field-name {
-            color: #c9d1d9;
+            color: var(--text);
             flex: 1;
         }
 
         .field-type {
-            color: #8b949e;
+            color: var(--text-muted);
             font-size: 0.8rem;
         }
 
         /* SQL query blocks */
         .sql-block {
-            background: #161b22;
-            border: 1px solid rgba(88, 166, 255, 0.15);
-            border-left: 3px solid #58a6ff;
+            background: var(--bg-section);
+            border: 1px solid var(--border);
+            border-left: 3px solid var(--accent);
             border-radius: 8px;
             padding: 1.5rem;
             margin: 1.5rem 0;
@@ -207,7 +211,7 @@
         /* Query description */
         .sql-description {
             font-size: 0.9rem;
-            color: #8b949e;
+            color: var(--text-muted);
             margin-bottom: 0.8rem;
             font-style: italic;
         }
@@ -222,7 +226,7 @@
         }
 
         /* SQL keywords in blue */
-        .kw { color: #58a6ff; font-weight: bold; }
+        .kw { color: var(--accent); font-weight: bold; }
         /* Spatial functions in green */
         .fn { color: #10b981; }
         /* Strings in orange */
@@ -243,7 +247,7 @@
             align-items: center;
             gap: 0.4rem;
             font-size: 0.85rem;
-            color: #8b949e;
+            color: var(--text-muted);
         }
 
         /* Mobile responsive */
@@ -530,9 +534,9 @@
     </div>
 
     <!-- Footer -->
-    <div style="text-align:center; padding:3rem; color:#8b949e; font-size:0.85rem; border-top:1px solid rgba(255,255,255,0.08);">
+    <div style="text-align:center; padding:3rem; color:var(--text-muted); font-size:0.85rem; border-top:1px solid var(--border);">
         <p>Hosted on Codeberg • 100% Open Source</p>
-        <a href="index.html" style="color:#58a6ff; margin-top:1rem; display:inline-block;">← Back to portfolio</a>
+        <a href="index.html" style="color:var(--accent); margin-top:1rem; display:inline-block;">← Back to portfolio</a>
     </div>
 
 </body>
