@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bases de Données Spatiales - Géomaticien</title>
+    <link rel="icon" type="image/png" href="../assets/images/logo_geomatique.png">
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        /* ===== STYLES SPÉCIFIQUES À CETTE PAGE ===== */
+
+        /* Fond de page */
+        body {
+            background: #0d1117;
+        }
+
+        /* Section hero de la page */
+        .page-hero {
+            padding: 8rem 3rem 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .page-hero h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            color: #ffffff;
+            margin-bottom: 1rem;
+        }
+
+        .page-hero p {
+            font-size: 1.1rem;
+            opacity: 0.8;
+            max-width: 700px;
+            line-height: 1.7;
+        }
+
+        /* Badge de tag en haut */
+        .page-tag {
+            display: inline-block;
+            background: rgba(88, 166, 255, 0.15);
+            color: #58a6ff;
+            border: 1px solid rgba(88, 166, 255, 0.3);
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Sections de contenu */
+        .content-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem;
+            border-top: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .content-section h2 {
+            font-size: 1.8rem;
+            color: #ffffff;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        /* Numéro de section */
+        .section-num {
+            color: #58a6ff;
+            font-size: 1rem;
+            font-weight: normal;
+        }
+
+        .content-section p {
+            opacity: 0.8;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            max-width: 800px;
+        }
+
+        /* Images des schémas avec zoom au survol */
+        .schema-img {
+            width: 100%;
+            max-width: 800px;
+            border-radius: 12px;
+            border: 1px solid rgba(88, 166, 255, 0.2);
+            margin: 1.5rem 0;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: zoom-in;
+        }
+
+        .schema-img:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 32px rgba(88, 166, 255, 0.2);
+        }
+
+        /* Légende sous les images */
+        .img-caption {
+            font-size: 0.85rem;
+            color: #8b949e;
+            margin-top: -1rem;
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+
+        /* Grille pour le modèle relationnel */
+        .model-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        /* Carte pour chaque table relationnelle */
+        .table-card {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(88, 166, 255, 0.2);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        /* En-tête de la carte avec le nom de la table */
+        .table-card-header {
+            background: rgba(88, 166, 255, 0.1);
+            padding: 0.8rem 1.2rem;
+            border-bottom: 1px solid rgba(88, 166, 255, 0.2);
+        }
+
+        .table-card-header h3 {
+            color: #58a6ff;
+            font-size: 1rem;
+            margin: 0;
+            font-family: monospace;
+        }
+
+        /* Corps de la carte avec les champs */
+        .table-card-body {
+            padding: 1rem 1.2rem;
+        }
+
+        .field-row {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.3rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            font-size: 0.9rem;
+            font-family: monospace;
+        }
+
+        .field-row:last-child {
+            border-bottom: none;
+        }
+
+        /* Badge clé primaire */
+        .badge-pk {
+            background: #f59e0b;
+            color: #0d1117;
+            font-size: 0.65rem;
+            padding: 0.15rem 0.4rem;
+            border-radius: 3px;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        /* Badge clé étrangère */
+        .badge-fk {
+            background: #8b5cf6;
+            color: #ffffff;
+            font-size: 0.65rem;
+            padding: 0.15rem 0.4rem;
+            border-radius: 3px;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        /* Badge géométrie */
+        .badge-geom {
+            background: #10b981;
+            color: #ffffff;
+            font-size: 0.65rem;
+            padding: 0.15rem 0.4rem;
+            border-radius: 3px;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .field-name {
+            color: #c9d1d9;
+            flex: 1;
+        }
+
+        .field-type {
+            color: #8b949e;
+            font-size: 0.8rem;
+        }
+
+        /* Blocs de requêtes SQL */
+        .sql-block {
+            background: #161b22;
+            border: 1px solid rgba(88, 166, 255, 0.15);
+            border-left: 3px solid #58a6ff; /* ligne bleue à gauche */
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        /* Description de la requête */
+        .sql-description {
+            font-size: 0.9rem;
+            color: #8b949e;
+            margin-bottom: 0.8rem;
+            font-style: italic;
+        }
+
+        /* Code SQL avec coloration */
+        .sql-block pre {
+            margin: 0;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* Mots-clés SQL en bleu */
+        .kw { color: #58a6ff; font-weight: bold; }
+        /* Fonctions spatiales en vert */
+        .fn { color: #10b981; }
+        /* Chaînes de caractères en orange */
+        .str { color: #f59e0b; }
+        /* Commentaires en gris */
+        .cm { color: #6e7681; font-style: italic; }
+
+        /* Légende des badges */
+        .legend {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin: 1rem 0 2rem;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.85rem;
+            color: #8b949e;
+        }
+
+        /* Responsive mobile */
+        @media (max-width: 768px) {
+            .page-hero {
+                padding: 6rem 1.5rem 2rem;
+            }
+            .content-section {
+                padding: 2rem 1.5rem;
+            }
+            .model-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation avec retour -->
+    <nav class="nav" style="display:flex; justify-content:space-between; align-items:center; padding:1rem 2rem; background:rgba(10,15,40,0.97); position:fixed; top:0; left:0; right:0; z-index:100;">
+        <a href="../index.html" style="color:#58a6ff;">← Accueil</a>
+        <div style="display:flex; gap:1.5rem; flex-wrap:wrap;">
+            <a href="../index.html#projects" style="color:#c9d1d9;">Projets</a>
+            <a href="../index.html#stack" style="color:#c9d1d9;">Stack</a>
+            <a href="../index.html#contact" style="color:#c9d1d9;">Contact</a>
+            <a href="cv.html" style="color:#c9d1d9;">CV</a>
+        </div>
+    </nav>
+
+    <!-- En-tête de la page -->
+    <div class="page-hero">
+        <span class="page-tag">Projet 03</span>
+        <h1>Bases de Données Spatiales</h1>
+        <p>Conception et modélisation de bases de données géographiques relationnelles. Schémas conceptuels UML, modèles relationnels avec clés primaires et étrangères, et requêtes SQL spatiales avec PostGIS.</p>
+        <div style="display:flex; gap:0.5rem; flex-wrap:wrap; margin-top:1.5rem;">
+            <span class="tag">SQL</span>
+            <span class="tag">PostGIS</span>
+            <span class="tag">UML</span>
+            <span class="tag">PostgreSQL</span>
+            <span class="tag">MCD</span>
+        </div>
+    </div>
+
+    <!-- Section 1 : Schéma Conceptuel -->
+    <div class="content-section">
+        <h2>
+            <span class="section-num">01 —</span>
+            Schéma Conceptuel de Données (MCD)
+        </h2>
+        <p>Le schéma conceptuel UML représente les entités géographiques et leurs relations. Chaque entité possède un attribut <code style="color:#10b981;">geometrie: Geometry</code> qui stocke la donnée spatiale (point, ligne, polygone) dans PostGIS.</p>
+
+        <img
+            src="../assets/images/schema_conceptuel_de_la_base_de_donnees.png"
+            alt="Schéma conceptuel UML de la base de données spatiale"
+            class="schema-img"
+        >
+        <p class="img-caption">Fig. 1 — Schéma conceptuel UML : entités Rivière, Commune, Parcelle, Bâtiment avec héritage et associations spatiales</p>
+
+        <!-- Explication des relations -->
+        <div class="model-grid">
+            <div class="table-card">
+                <div class="table-card-header"><h3>🔗 Relations clés</h3></div>
+                <div class="table-card-body">
+                    <div class="field-row"><span class="field-name">Riviere est_traversee_par Commune</span></div>
+                    <div class="field-row"><span class="field-name">Commune estComposeDe Parcelle (1..*)</span></div>
+                    <div class="field-row"><span class="field-name">Parcelle ← ParcelleConstructible</span></div>
+                    <div class="field-row"><span class="field-name">Parcelle ← ParcelleAgricole</span></div>
+                    <div class="field-row"><span class="field-name">Batiment estSitueSur ParcelleConstructible</span></div>
+                </div>
+            </div>
+            <div class="table-card">
+                <div class="table-card-header"><h3>📐 Types de géométries</h3></div>
+                <div class="table-card-body">
+                    <div class="field-row">
+                        <span class="badge-geom">GEOM</span>
+                        <span class="field-name">Riviere</span>
+                        <span class="field-type">MultiLineString</span>
+                    </div>
+                    <div class="field-row">
+                        <span class="badge-geom">GEOM</span>
+                        <span class="field-name">Commune</span>
+                        <span class="field-type">Polygon</span>
+                    </div>
+                    <div class="field-row">
+                        <span class="badge-geom">GEOM</span>
+                        <span class="field-name">Parcelle</span>
+                        <span class="field-type">Polygon</span>
+                    </div>
+                    <div class="field-row">
+                        <span class="badge-geom">GEOM</span>
+                        <span class="field-name">Batiment</span>
+                        <span class="field-type">Polygon</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 2 : Modèle Relationnel -->
+    <div class="content-section">
+        <h2>
+            <span class="section-num">02 —</span>
+            Modèle Logique des Données (MLD)
+        </h2>
+        <p>Le modèle relationnel traduit le schéma conceptuel en tables SQL. Les clés primaires (PK) identifient chaque enregistrement de façon unique, les clés étrangères (FK) assurent l'intégrité référentielle entre les tables.</p>
+
+        <img
+            src="../assets/images/schema_relationnel.png"
+            alt="Schéma relationnel de la base de données"
+            class="schema-img"
+        >
+        <p class="img-caption">Fig. 2 — Modèle logique des données : tables, clés primaires, clés étrangères et géométries</p>
+
+        <!-- Légende des badges -->
+        <div class="legend">
+            <div class="legend-item"><span class="badge-pk">PK</span> Clé primaire</div>
+            <div class="legend-item"><span class="badge-fk">FK</span> Clé étrangère</div>
+            <div class="legend-item"><span class="badge-geom">GEO</span> Géométrie spatiale</div>
+        </div>
+
+        <!-- Tables relationnelles -->
+        <div class="model-grid">
+            <div class="table-card">
+                <div class="table-card-header"><h3>Departement</h3></div>
+                <div class="table-card-body">
+                    <div class="field-row">
+                        <span class="badge-pk">PK</span>
+                        <span class="field-name">NomD</span>
+                        <span class="field-type">string</span>
+                    </div>
+                    <div class="field-row">
+                        <span class="badge-geom">GEO</span>
+                        <span class="field-name">the_geom</span>
+                        <span class="field-type">Polygon</span>
+                    </div>
+                    <div class="field-row">
+                        <span class="badge-fk">FK</span>
+                        <span class="field-name">id_region</span>
+                        <span class="field-type">→ Region</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="table-card">
+                <div class="table-card-header"><h3>Commune</h3></div>
+                <div class="table-card-body">
+                    <div class="field-row">
+                        <span class="badge-pk">PK</span>
+                        <span class="field-name">NUMINSEE</span>
+                        <span class="field-type">int</span>
+                    </div>
+                    <div class="field-row">
+                        <span class="field-name">nomCom</span>
+                        <span class="field-type">string</span>
+                    </div>
+                    <div class="field-row">
+                        <span class="badge-geom">GEO</span>
+                        <span class="field-name">the_geom</span>
+                        <span class="field-type">Polygon</span>
+                    </div>
+                    <div class="field-row">
+                        <span class="badge-fk">FK</span>
+                        <span class="field-name">NomD</span>
+                        <span class="field-type">→ Departement</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="table-card">
+                <div class="table-card-header"><h3>Parcelle</h3></div>
+                <div class="table-card-body">
+                    <div class="field-row">
+                        <span class="badge-pk">PK</span>
+                        <span class="field-name">numCad</span>
+                        <span class="field-type">int</span>
+                    </div>
+                    <div class="field-row">
+                        <span class="field-name">typeculture</span>
+                        <span class="field-type">string</span>
+                    </div>
+                    <div class="field-row">
+                        <span class="field-name">COS</span>
+                        <span class="field-type">float</span>
+                    </div>
+                    <div class="field-row">
+                        <span class="badge-geom">GEO</span>
+                        <span class="field-name">the_geom</span>
+                        <span class="field-type">Polygon</span>
+                    </div>
+                    <div class="field-row">
+                        <span class="badge-fk">FK</span>
+                        <span class="field-name">NUMINSEE</span>
+                        <span class="field-type">→ Commune</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="table-card">
+                <div class="table-card-header"><h3>Riviere</h3></div>
+                <div class="table-card-body">
+                    <div class="field-row">
+                        <span class="badge-pk">PK</span>
+                        <span class="field-name">NumR</span>
+                        <span class="field-type">int</span>
+                    </div>
+                    <div class="field-row">
+                        <span class="field-name">Nom</span>
+                        <span class="field-type">string</span>
+                    </div>
+                    <div class="field-row">
+                        <span class="badge-geom">GEO</span>
+                        <span class="field-name">the_geom</span>
+                        <span class="field-type">MultiLineString</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="table-card">
+                <div class="table-card-header"><h3>Est_traversee_par</h3></div>
+                <div class="table-card-body">
+                    <div class="field-row">
+                        <span class="badge-pk">PK</span>
+                        <span class="badge-fk">FK</span>
+                        <span class="field-name">NUMINSEE</span>
+                        <span class="field-type">→ Commune</span>
+                    </div>
+                    <div class="field-row">
+                        <span class="badge-pk">PK</span>
+                        <span class="badge-fk">FK</span>
+                        <span class="field-name">NumR</span>
+                        <span class="field-type">→ Riviere</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Section 3 : Requêtes SQL Spatiales -->
+    <div class="content-section">
+        <h2>
+            <span class="section-num">03 —</span>
+            Requêtes SQL Spatiales
+        </h2>
+        <p>Exemples de requêtes SQL utilisant les fonctions spatiales de PostGIS pour interroger et analyser les données géographiques.</p>
+
+        <!-- Requête 1 -->
+        <div class="sql-block">
+            <p class="sql-description">Communes traversées par une rivière spécifique (jointure spatiale avec ST_Intersects)</p>
+            <pre><span class="kw">SELECT DISTINCT</span>(c.nomCom)
+<span class="kw">FROM</span> Commune c, Riviere r
+<span class="kw">WHERE</span> <span class="fn">ST_INTERSECTS</span>(c.the_geom, r.the_geom)
+  <span class="kw">AND</span> r.Nom = <span class="str">'Le Lez'</span>;</pre>
+        </div>
+
+        <!-- Requête 2 -->
+        <div class="sql-block">
+            <p class="sql-description">Communes d'un département donné (jointure attributaire)</p>
+            <pre><span class="kw">SELECT</span> c.NomCom
+<span class="kw">FROM</span> Departement d, Commune c
+<span class="kw">WHERE</span> d.NomD = <span class="str">'Languedoc-R'</span>;</pre>
+        </div>
+
+        <!-- Requête 3 -->
+        <div class="sql-block">
+            <p class="sql-description">Parcelles viticoles d'une commune (filtre attributaire)</p>
+            <pre><span class="kw">SELECT</span> numCad
+<span class="kw">FROM</span> Parcelle
+<span class="kw">WHERE</span> NomCom = <span class="str">'PradesLeLez'</span>
+  <span class="kw">AND</span> typeculture = <span class="str">'viticole'</span>;</pre>
+        </div>
+
+        <!-- Requête 4 -->
+        <div class="sql-block">
+            <p class="sql-description">Communes de l'Hérault voisines de Saint-Mathieu (ST_Touches = partage une frontière)</p>
+            <pre><span class="kw">SELECT</span> c2.NUMINSEE
+<span class="kw">FROM</span> Commune c1, Commune c2, Departement d
+<span class="kw">WHERE</span> d.nomD = <span class="str">'Herault'</span>
+  <span class="kw">AND</span> c1.NomCom = <span class="str">'SaintMathieu'</span>
+  <span class="kw">AND</span> <span class="fn">ST_TOUCHES</span>(c1.the_geom, c2.the_geom); <span class="cm">-- partage une frontière commune</span></pre>
+        </div>
+
+    </div>
+
+    <!-- Pied de page -->
+    <div style="text-align:center; padding:3rem; color:#8b949e; font-size:0.85rem; border-top:1px solid rgba(255,255,255,0.08);">
+        <p>Hébergé sur Codeberg • 100% Open Source</p>
+        <a href="../index.html" style="color:#58a6ff; margin-top:1rem; display:inline-block;">← Retour au portfolio</a>
+    </div>
+
+</body>
+</html>

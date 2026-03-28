@@ -109,18 +109,52 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     // ============================================
-    // SCROLL FLUIDE (Ancres)
+    // SCROLL RAPIDE (Ancres)
     // ============================================
 
-    /** Anime le scroll vers les ancres (#section) */
+    /** Scroll rapide vers les ancres (#section) avec offset pour le header fixe */
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
             e.preventDefault();
             const target = document.querySelector(this.getAttribute('href'));
             if (target) {
-                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                const headerOffset = 80; // Marge pour le header fixe
+                const elementPosition = target.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'auto' // Instant scroll, plus rapide que smooth
+                });
             }
         });
+    });
+
+    // ============================================
+    // GESTION DU HEADER AU SCROLL
+    // ============================================
+
+    // Cache/montre le header selon la direction du scroll
+    let lastScroll = 0;
+    const header = document.querySelector('.nav');
+
+    window.addEventListener('scroll', () => {
+        const currentScroll = window.pageYOffset;
+
+        if (currentScroll <= 0) {
+            header?.style.removeProperty('transform');
+            return;
+        }
+
+        if (currentScroll > lastScroll && currentScroll > 100) {
+            // Scroll vers le bas = cache le header
+            header.style.transform = 'translateY(-100%)';
+        } else {
+            // Scroll vers le haut = montre le header
+            header.style.transform = 'translateY(0)';
+        }
+
+        lastScroll = currentScroll;
     });
 
 });
