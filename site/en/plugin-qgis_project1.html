@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QGIS Plugin ProxiSanté - Geomatician</title>
+    <link rel="icon" type="image/png" href="../../assets/images/logo_geomatique.png">
+    <link rel="stylesheet" href="../../css/style.css">
+    <script src="../../js/main.js" defer></script>
+    <style>
+        body { background: var(--bg); }
+
+        .page-hero {
+            padding: 8rem 3rem 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .page-hero h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            color: var(--text-title);
+            margin-bottom: 1rem;
+        }
+
+        .page-hero p {
+            font-size: 1.1rem;
+            color: var(--text);
+            opacity: 0.8;
+            max-width: 700px;
+            line-height: 1.7;
+        }
+
+        .page-tag {
+            display: inline-block;
+            background: var(--tag-bg);
+            color: var(--accent);
+            border: 1px solid var(--tag-border);
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+        }
+
+        .content-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .content-section h2 {
+            font-size: 1.8rem;
+            color: var(--text-title);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .section-num { color: var(--accent); font-size: 1rem; font-weight: normal; }
+
+        .content-section p {
+            color: var(--text);
+            opacity: 0.8;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            max-width: 800px;
+        }
+
+        /* Images avec zoom au survol */
+        .schema-img {
+            width: 100%;
+            max-width: 900px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            margin: 1.5rem 0;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: zoom-in;
+        }
+
+        .schema-img:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 32px rgba(88, 166, 255, 0.2);
+        }
+
+        .img-caption {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: -1rem;
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+
+        /* Grille pour les captures côte à côte */
+        .img-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .img-grid-item img {
+            width: 100%;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            transition: transform 0.3s;
+            cursor: zoom-in;
+        }
+
+        .img-grid-item img:hover { transform: scale(1.02); }
+
+        .img-grid-item p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-style: italic;
+            margin-top: 0.5rem;
+        }
+
+        /* Bloc de code Python */
+        .code-block {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-left: 3px solid var(--accent);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            overflow-x: auto;
+        }
+
+        .code-block pre {
+            margin: 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            line-height: 1.7;
+            color: var(--text);
+        }
+
+        /* Coloration syntaxique Python (identique pour les deux thèmes) */
+        .py-kw  { color: #ff7b72; font-weight: bold; }
+        .py-fn  { color: #58a6ff; }
+        .py-str { color: #a5d6ff; }
+        .py-cm  { color: #6e7681; font-style: italic;}
+        .py-cl  { color: #ffa657; }
+        .py-nb  { color: #79c0ff; }
+
+        /* Description d'une section de code */
+        .code-description {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 0.8rem;
+            font-style: italic;
+        }
+
+        /* Cartes des fonctionnalités */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+
+        .feature-card h3 {
+            color: var(--accent);
+            margin-bottom: 0.8rem;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .feature-card p {
+            font-size: 0.9rem;
+            color: var(--text);
+            opacity: 0.75;
+            margin: 0;
+        }
+
+        /* Logo du plugin centré */
+        .plugin-logo {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .plugin-logo img {
+            width: 80px;
+            border-radius: 16px;
+        }
+
+        .plugin-logo-text h3 {
+            color: var(--text-title);
+            font-size: 1.3rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .plugin-logo-text p {
+            color: var(--text);
+            opacity: 0.7;
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        /* Navigation */
+        .page-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background: var(--menu-bg);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+        }
+
+        .page-nav a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .page-nav-links {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .page-nav-links a {
+            color: var(--text);
+        }
+
+        @media (max-width: 768px) {
+            .page-hero { padding: 6rem 1.5rem 2rem; }
+            .content-section { padding: 2rem 1.5rem; }
+            .img-grid { grid-template-columns: 1fr; }
+        }
+
+        /* Lightbox pour zoomer les images */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            cursor: zoom-out;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 8px;
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="page-nav">
+        <a href="index.html">← Home</a>
+        <div class="page-nav-links">
+            <a href="index.html#projects">Projects</a>
+            <a href="index.html#stack">Stack</a>
+            <a href="index.html#contact">Contact</a>
+            <a href="cv.html">CV</a>
+        </div>
+    </nav>
+
+    <!-- En-tête -->
+    <div class="page-hero">
+        <span class="page-tag">Project 01</span>
+
+        <!-- Logo + titre -->
+        <div class="plugin-logo">
+            <img src="../../assets/images/icon_plugin_proxisante.png" alt="ProxiSanté Icon">
+            <div class="plugin-logo-text">
+                <h3>ProxiSanté</h3>
+                <p>QGIS Plugin • Python • PyQGIS • Qt Designer • Graphical Modeler</p>
+            </div>
+        </div>
+
+        <h1>QGIS Plugin — ProxiSanté</h1>
+        <p>QGIS plugin developed in Python that automatically finds the fastest route from a starting point (Lambert-93 coordinates) to the nearest hospitals. Developed in pair as part of a university project at the University of Montpellier.</p>
+
+        <div style="display:flex; gap:0.5rem; flex-wrap:wrap; margin-top:1.5rem;">
+            <span class="tag">Python</span>
+            <span class="tag">PyQGIS</span>
+            <span class="tag">Qt Designer</span>
+            <span class="tag">Graphical Modeler</span>
+            <span class="tag">Routing</span>
+            <span class="tag">Network Analysis</span>
+        </div>
+    </div>
+
+    <!-- Section 1 : Fonctionnalités -->
+    <div class="content-section">
+        <h2><span class="section-num">01 —</span> Features</h2>
+        <p>The plugin automates road network analysis to calculate optimal routes to hospital facilities from anywhere in the territory.</p>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <h3>📍 Coordinate Input</h3>
+                <p>Enter starting coordinates in Lambert-93 (X,Y). Automatic format validation and error handling.</p>
+            </div>
+            <div class="feature-card">
+                <h3>🛣️ Network Analysis</h3>
+                <p>Calculate fastest routes to all hospitals via road network, with travel time in minutes.</p>
+            </div>
+            <div class="feature-card">
+                <h3>🏆 Automatic Ranking</h3>
+                <p>Sort hospitals from fastest to slowest. Extract and highlight the optimal route in red.</p>
+            </div>
+            <div class="feature-card">
+                <h3>🗺️ QGIS Visualization</h3>
+                <p>Automatic loading of results in QGIS with differentiated styles: blue for all paths, red for the fastest.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 2 : Interface Qt Designer -->
+    <div class="content-section">
+        <h2><span class="section-num">02 —</span> User Interface — Qt Designer</h2>
+        <p>The interface was designed with Qt Designer and integrated into QGIS via PyQGIS. Signals and slots enable communication between widgets and business logic.</p>
+
+        <div class="img-grid">
+            <div class="img-grid-item">
+                <img src="../../assets/images/IU_final_plugin_proxisante.png" alt="ProxiSanté plugin final interface">
+                <p>Final interface — coordinate input, scale and layer selection</p>
+            </div>
+            <div class="img-grid-item">
+                <img src="../../assets/images/Qt_designer_IU_slots_plugin_proxisante.png" alt="Qt Designer — signals and slots editor">
+                <p>Qt Designer — signals and slots editor (mScaleWidget, mMapLayerComboBox, lineEdit)</p>
+            </div>
+        </div>
+
+        <!-- Extrait du code de l'interface -->
+        <p class="code-description">Code excerpt — retrieving parameters from the interface and validating coordinates:</p>
+        <div class="code-block">
+            <pre><span class="py-cm"># Retrieve selected layers from ComboBoxes</span>
+textMapLayer1 = <span class="py-nb">self</span>.dlg.mMapLayerComboBox.currentText()
+textMapLayer2 = <span class="py-nb">self</span>.dlg.mMapLayerComboBox_2.currentText()
+
+<span class="py-cm"># Retrieve and validate starting coordinates</span>
+Coordonnees_depart_texte = <span class="py-nb">self</span>.dlg.lineEdit.displayText().strip()
+point_depart = <span class="py-nb">self</span>.Obtenir_Coordonnees_depart(Coordonnees_depart_texte)
+
+<span class="py-kw">def</span> <span class="py-fn">Obtenir_Coordonnees_depart</span>(<span class="py-nb">self</span>, Coordonnees_depart_texte):
+    <span class="py-kw">try</span>:
+        Coordonnees = Coordonnees_depart_texte.strip().split(<span class="py-str">','</span>)
+        <span class="py-kw">if</span> len(Coordonnees) != <span class="py-str">2</span>:
+            <span class="py-kw">raise</span> <span class="py-cl">ValueError</span>(<span class="py-str">"Invalid coordinate format"</span>)
+        lat, lon = <span class="py-fn">map</span>(float, Coordonnees)
+        <span class="py-kw">return</span> <span class="py-cl">QgsPointXY</span>(lat, lon)  <span class="py-cm"># Create a QGIS geographic point</span>
+    <span class="py-kw">except</span> (<span class="py-cl">ValueError</span>, <span class="py-cl">IndexError</span>) <span class="py-kw">as</span> e:
+        <span class="py-cl">QMessageBox</span>.warning(<span class="py-nb">None</span>, <span class="py-str">"Error"</span>,
+            <span class="py-str">f"Invalid format. Use: X,Y (e.g., 711980,6242711). Error: {str(e)}"</span>)
+        <span class="py-kw">return None</span></pre>
+        </div>
+    </div>
+
+    <!-- Section 3 : Modeleur graphique QGIS -->
+    <div class="content-section">
+        <h2><span class="section-num">03 —</span> QGIS Graphical Modeler</h2>
+        <p>Algorithm processing is encapsulated in a QGIS graphical model that orchestrates the different steps: spatial indexing, route calculation, travel time calculation in minutes, sorting and optimal route extraction.</p>
+
+        <img
+            src="../../assets/images/modeleur_graphique_qgis_minutes_plugin_proxisante.png"
+            alt="QGIS Graphical Modeler — ProxiSanté algorithm"
+            class="schema-img"
+        >
+        <p class="img-caption">Fig. 1 — QGIS Graphical Model: complete processing pipeline from inputs (hospitals, road network, start) to outputs (sorted paths and optimal route)</p>
+
+        <!-- Explication du pipeline -->
+        <div class="features-grid">
+            <div class="feature-card">
+                <h3>① Spatial Indexing</h3>
+                <p>Spatial index on hospitals and road network to optimize geographic queries.</p>
+            </div>
+            <div class="feature-card">
+                <h3>② Route Calculation</h3>
+                <p>Fastest route from starting point to each hospital in the network.</p>
+            </div>
+            <div class="feature-card">
+                <h3>③ Time in Minutes</h3>
+                <p>Conversion and calculation of travel time in minutes for each calculated route.</p>
+            </div>
+            <div class="feature-card">
+                <h3>④ Sorting & Extraction</h3>
+                <p>Sort in ascending order, selection and extraction of the fastest route to the optimal hospital.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 4 : Résultats dans QGIS -->
+    <div class="content-section">
+        <h2><span class="section-num">04 —</span> Results and Visualization</h2>
+        <p>Results are automatically loaded into QGIS with differentiated symbology. Paths to all hospitals appear in blue, the optimal route to the nearest hospital is highlighted in red.</p>
+
+        <img
+            src="../../assets/images/capture_coordonnees.png"
+            alt="ProxiSanté result in QGIS — blue paths and optimal route in red"
+            class="schema-img"
+        >
+        <p class="img-caption">Fig. 2 — Result in QGIS: paths to all hospitals (blue) and fastest route (red). Copy coordinates in Lambert-93 or WGS84 via right-click.</p>
+
+        <!-- Code de chargement des résultats -->
+        <p class="code-description">Code excerpt — automatic loading and styling of results in QGIS:</p>
+        <div class="code-block">
+            <pre><span class="py-kw">def</span> <span class="py-fn">charger_resultats</span>(<span class="py-nb">self</span>, pathResult1, pathResult2):
+
+    <span class="py-cm"># All paths to hospitals — thin blue line</span>
+    vlayer1 = <span class="py-cl">QgsVectorLayer</span>(pathResult1, <span class="py-str">"Paths to hospitals"</span>, <span class="py-str">"ogr"</span>)
+    <span class="py-kw">if</span> vlayer1.isValid():
+        symbol1 = <span class="py-cl">QgsLineSymbol</span>.createSimple({
+            <span class="py-str">'line_color'</span>: <span class="py-str">'0,0,255,255'</span>,   <span class="py-cm"># Blue</span>
+            <span class="py-str">'line_width'</span>: <span class="py-str">'1'</span>
+        })
+        vlayer1.renderer().setSymbol(symbol1)
+        <span class="py-cl">QgsProject</span>.instance().addMapLayer(vlayer1)
+
+    <span class="py-cm"># Optimal route — thick red line</span>
+    vlayer2 = <span class="py-cl">QgsVectorLayer</span>(pathResult2, <span class="py-str">"Nearest hospital"</span>, <span class="py-str">"ogr"</span>)
+    <span class="py-kw">if</span> vlayer2.isValid():
+        symbol2 = <span class="py-cl">QgsLineSymbol</span>.createSimple({
+            <span class="py-str">'line_color'</span>: <span class="py-str">'255,0,0,255'</span>,   <span class="py-cm"># Red</span>
+            <span class="py-str">'line_width'</span>: <span class="py-str">'2'</span>
+        })
+        vlayer2.renderer().setSymbol(symbol2)
+        <span class="py-cl">QgsProject</span>.instance().addMapLayer(vlayer2)</pre>
+        </div>
+    </div>
+
+    <!-- Section 5 : Extension QGIS -->
+    <div class="content-section">
+        <h2><span class="section-num">05 —</span> Installation — QGIS Plugin</h2>
+        <p>The plugin can be installed directly from the QGIS plugin manager and appears in the Extensions menu and toolbar.</p>
+
+        <img
+            src="../../assets/images/plugin_proxisante_QGIS.png"
+            alt="ProxiSanté Plugin in QGIS plugin manager"
+            class="schema-img"
+        >
+        <p class="img-caption">Fig. 3 — ProxiSanté Plugin installed in QGIS — plugin manager with description, category and links</p>
+
+        <!-- Liens -->
+        <div style="margin-top:2rem; display:flex; gap:1.5rem; flex-wrap:wrap;">
+            <a href="https://codeberg.org/Geomagicien/qgis-plugin" target="_blank"
+               style="display:inline-flex; align-items:center; gap:8px; color:var(--accent); font-weight:500;">
+                <span>View repository</span>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                    <path d="M5 12h14m0 0l-7-7m7 7l-7 7" stroke="currentColor" stroke-width="2"/>
+                </svg>
+            </a>
+            <a href="/scripts/python/ProxiSante.py" target="_blank"
+               style="display:inline-flex; align-items:center; gap:8px; color:var(--accent); font-weight:500;">
+                <span>View Python script</span>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                    <path d="M5 12h14m0 0l-7-7m7 7l-7 7" stroke="currentColor" stroke-width="2"/>
+                </svg>
+            </a>
+        </div>
+    </div>
+
+    <!-- Pied de page -->
+    <div style="text-align:center; padding:3rem; color:var(--text-muted); font-size:0.85rem; border-top:1px solid var(--border);">
+        <p>Hosted on Codeberg • 100% Open Source</p>
+        <a href="index.html" style="color:var(--accent); margin-top:1rem; display:inline-block;">← Back to portfolio</a>
+    </div>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close">&times;</button>
+        <img src="" alt="Zoomed image">
+    </div>
+
+    <script>
+        // Lightbox pour zoomer les images
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = lightbox.querySelector('img');
+        const lightboxClose = lightbox.querySelector('.lightbox-close');
+
+        document.querySelectorAll('.schema-img, .img-grid-item img').forEach(img => {
+            img.addEventListener('click', () => {
+                lightboxImg.src = img.src;
+                lightbox.classList.add('active');
+            });
+        });
+
+        lightbox.addEventListener('click', () => {
+            lightbox.classList.remove('active');
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') lightbox.classList.remove('active');
+        });
+
+        // Hide/show header on scroll
+        let lastScroll = 0;
+        const header = document.querySelector('.page-nav');
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+
+            if (currentScroll <= 0) {
+                header.style.removeProperty('transform');
+                return;
+            }
+
+            if (currentScroll > lastScroll && currentScroll > 100) {
+                header.style.transform = 'translateY(-100%)';
+            } else {
+                header.style.transform = 'translateY(0)';
+            }
+
+            lastScroll = currentScroll;
+        });
+    </script>
+
+</body>
+</html>

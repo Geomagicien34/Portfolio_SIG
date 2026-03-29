@@ -37,22 +37,23 @@
     <!-- ================================================
          NAVIGATION (Fixed header)
          ================================================ -->
+    <!-- Burger button (left) -->
+    <div class="nav-container">
+        <button class="burger-btn" id="burger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </div>
+    <!-- Language and theme buttons (right) -->
+    <div class="nav-right">
+        <a href="../../index.html" class="lang-btn">FR</a>
+        <button id="theme-toggle" class="theme-btn" title="Toggle theme">
+            <span class="theme-icon">☀️</span>
+        </button>
+    </div>
+
     <nav class="nav">
-        <!-- Buttons container (burger, language, theme) -->
-        <div class="nav-container">
-            <!-- Burger menu button (mobile) -->
-            <button class="burger-btn" id="burger">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-            <!-- Language switch button -->
-            <a href="../../index.html" class="lang-btn">FR</a>
-            <!-- Theme switch button -->
-            <button id="theme-toggle" class="theme-btn" title="Toggle theme">
-                <span class="theme-icon">☀️</span>
-            </button>
-        </div>
     </nav>
     
     <!-- ================================================
@@ -130,7 +131,7 @@
                 <p class="hero-intro">Geomatician passionate about new technologies, cartography, webmapping, programming and open source (FOSS). I explore, analyze and visualize territory with free tools.</p>
             </div>
             <!-- Scroll indicator -->
-            <div class="scroll-indicator">
+            <a href="#projects" class="scroll-indicator">
                 <span class="scroll-text"><strong>Discover my projects</strong></span>
                 <hr class="scroll-divider">
                 <div class="scroll-arrow">
@@ -138,7 +139,7 @@
                         <path d="M12 5v14m0 0l-7-7m7 7l7-7" stroke="currentColor" stroke-width="2"/>
                     </svg>
                 </div>
-            </div>
+            </a>
         </div>
     </section>
     
@@ -169,8 +170,8 @@
                     <span class="tag">Itinerary</span>
                 </div>
                 <div class="project-links">
-                    <a href="https://codeberg.org/Geomagicien/qgis-plugin" class="link-animated">
-                        <span>View code</span>
+                    <a href="plugin-qgis_project1.html" class="link-animated">
+                        <span>View project</span>
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
                             <path d="M5 12h14m0 0l-7-7m7 7l-7 7" stroke="currentColor" stroke-width="2"/>
                         </svg>

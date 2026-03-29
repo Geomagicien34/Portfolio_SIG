@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plugin QGIS ProxiSanté - Géomaticien</title>
+    <link rel="icon" type="image/png" href="../assets/images/logo_geomatique.png">
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="../js/main.js" defer></script>
+    <style>
+        body { background: var(--bg); }
+
+        .page-hero {
+            padding: 8rem 3rem 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .page-hero h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            color: var(--text-title);
+            margin-bottom: 1rem;
+        }
+
+        .page-hero p {
+            font-size: 1.1rem;
+            color: var(--text);
+            opacity: 0.8;
+            max-width: 700px;
+            line-height: 1.7;
+        }
+
+        .page-tag {
+            display: inline-block;
+            background: var(--tag-bg);
+            color: var(--accent);
+            border: 1px solid var(--tag-border);
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+        }
+
+        .content-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .content-section h2 {
+            font-size: 1.8rem;
+            color: var(--text-title);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .section-num { color: var(--accent); font-size: 1rem; font-weight: normal; }
+
+        .content-section p {
+            color: var(--text);
+            opacity: 0.8;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            max-width: 800px;
+        }
+
+        /* Images avec zoom au survol */
+        .schema-img {
+            width: 100%;
+            max-width: 900px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            margin: 1.5rem 0;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: zoom-in;
+        }
+
+        .schema-img:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 32px rgba(88, 166, 255, 0.2);
+        }
+
+        .img-caption {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: -1rem;
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+
+        /* Grille pour les captures côte à côte */
+        .img-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .img-grid-item img {
+            width: 100%;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            transition: transform 0.3s;
+            cursor: zoom-in;
+        }
+
+        .img-grid-item img:hover { transform: scale(1.02); }
+
+        .img-grid-item p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-style: italic;
+            margin-top: 0.5rem;
+        }
+
+        /* Bloc de code Python */
+        .code-block {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-left: 3px solid var(--accent);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            overflow-x: auto;
+        }
+
+        .code-block pre {
+            margin: 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            line-height: 1.7;
+            color: var(--text);
+        }
+
+        /* Coloration syntaxique Python (identique pour les deux thèmes) */
+        .py-kw  { color: #ff7b72; font-weight: bold; }
+        .py-fn  { color: #58a6ff; }
+        .py-str { color: #a5d6ff; }
+        .py-cm  { color: #6e7681; font-style: italic;}
+        .py-cl  { color: #ffa657; }
+        .py-nb  { color: #79c0ff; }
+
+        /* Description d'une section de code */
+        .code-description {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 0.8rem;
+            font-style: italic;
+        }
+
+        /* Cartes des fonctionnalités */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+
+        .feature-card h3 {
+            color: var(--accent);
+            margin-bottom: 0.8rem;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .feature-card p {
+            font-size: 0.9rem;
+            color: var(--text);
+            opacity: 0.75;
+            margin: 0;
+        }
+
+        /* Logo du plugin centré */
+        .plugin-logo {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .plugin-logo img {
+            width: 80px;
+            border-radius: 16px;
+        }
+
+        .plugin-logo-text h3 {
+            color: var(--text-title);
+            font-size: 1.3rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .plugin-logo-text p {
+            color: var(--text);
+            opacity: 0.7;
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        /* Navigation */
+        .page-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background: var(--menu-bg);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+        }
+
+        .page-nav a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .page-nav-links {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .page-nav-links a {
+            color: var(--text);
+        }
+
+        @media (max-width: 768px) {
+            .page-hero { padding: 6rem 1.5rem 2rem; }
+            .content-section { padding: 2rem 1.5rem; }
+            .img-grid { grid-template-columns: 1fr; }
+        }
+
+        /* Lightbox pour zoomer les images */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            cursor: zoom-out;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 8px;
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="page-nav">
+        <a href="../index.html">← Accueil</a>
+        <div class="page-nav-links">
+            <a href="../index.html#projects">Projets</a>
+            <a href="../index.html#stack">Stack</a>
+            <a href="../index.html#contact">Contact</a>
+            <a href="cv.html">CV</a>
+        </div>
+    </nav>
+
+    <!-- En-tête -->
+    <div class="page-hero">
+        <span class="page-tag">Projet 01</span>
+
+        <!-- Logo + titre -->
+        <div class="plugin-logo">
+            <img src="../assets/images/icon_plugin_proxisante.png" alt="Icône ProxiSanté">
+            <div class="plugin-logo-text">
+                <h3>ProxiSanté</h3>
+                <p>Plugin QGIS • Python • PyQGIS • Qt Designer • Modeleur graphique</p>
+            </div>
+        </div>
+
+        <h1>Plugin QGIS — ProxiSanté</h1>
+        <p>Plugin QGIS développé en Python permettant de trouver automatiquement le chemin le plus rapide depuis un point de départ (coordonnées Lambert-93) vers les hôpitaux les plus proches. Développé en binôme dans le cadre d'un projet universitaire à l'Université de Montpellier.</p>
+
+        <div style="display:flex; gap:0.5rem; flex-wrap:wrap; margin-top:1.5rem;">
+            <span class="tag">Python</span>
+            <span class="tag">PyQGIS</span>
+            <span class="tag">Qt Designer</span>
+            <span class="tag">Modeleur graphique</span>
+            <span class="tag">Itinéraire</span>
+            <span class="tag">Analyse de réseau</span>
+        </div>
+    </div>
+
+    <!-- Section 1 : Fonctionnalités -->
+    <div class="content-section">
+        <h2><span class="section-num">01 —</span> Fonctionnalités</h2>
+        <p>Le plugin automatise l'analyse de réseau routier pour calculer les itinéraires optimaux vers les structures hospitalières à partir de n'importe quel point du territoire.</p>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <h3>📍 Saisie des coordonnées</h3>
+                <p>Entrée des coordonnées de départ en Lambert-93 (X,Y). Validation automatique du format et gestion des erreurs de saisie.</p>
+            </div>
+            <div class="feature-card">
+                <h3>🛣️ Analyse de réseau</h3>
+                <p>Calcul des itinéraires les plus rapides vers tous les hôpitaux via le réseau routier, avec temps de trajet en minutes.</p>
+            </div>
+            <div class="feature-card">
+                <h3>🏆 Classement automatique</h3>
+                <p>Tri des hôpitaux du plus rapide au moins rapide. Extraction et mise en évidence du trajet optimal en rouge.</p>
+            </div>
+            <div class="feature-card">
+                <h3>🗺️ Visualisation QGIS</h3>
+                <p>Chargement automatique des résultats dans QGIS avec styles différenciés : bleu pour tous les chemins, rouge pour le plus rapide.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 2 : Interface Qt Designer -->
+    <div class="content-section">
+        <h2><span class="section-num">02 —</span> Interface utilisateur — Qt Designer</h2>
+        <p>L'interface a été conçue avec Qt Designer et intégrée à QGIS via PyQGIS. Les signaux et slots permettent la communication entre les widgets et la logique métier.</p>
+
+        <div class="img-grid">
+            <div class="img-grid-item">
+                <img src="../assets/images/IU_final_plugin_proxisante.png" alt="Interface finale du plugin ProxiSanté">
+                <p>Interface finale — saisie coordonnées, échelle et sélection des couches</p>
+            </div>
+            <div class="img-grid-item">
+                <img src="../assets/images/Qt_designer_IU_slots_plugin_proxisante.png" alt="Qt Designer — éditeur de signaux et slots">
+                <p>Qt Designer — éditeur de signaux et slots (mScaleWidget, mMapLayerComboBox, lineEdit)</p>
+            </div>
+        </div>
+
+        <!-- Extrait du code de l'interface -->
+        <p class="code-description">Extrait — récupération des paramètres saisis dans l'interface et validation des coordonnées :</p>
+        <div class="code-block">
+            <pre><span class="py-cm"># Récupération des couches sélectionnées dans les ComboBox</span>
+textMapLayer1 = <span class="py-nb">self</span>.dlg.mMapLayerComboBox.currentText()
+textMapLayer2 = <span class="py-nb">self</span>.dlg.mMapLayerComboBox_2.currentText()
+
+<span class="py-cm"># Récupération et validation des coordonnées de départ</span>
+Coordonnees_depart_texte = <span class="py-nb">self</span>.dlg.lineEdit.displayText().strip()
+point_depart = <span class="py-nb">self</span>.Obtenir_Coordonnees_depart(Coordonnees_depart_texte)
+
+<span class="py-kw">def</span> <span class="py-fn">Obtenir_Coordonnees_depart</span>(<span class="py-nb">self</span>, Coordonnees_depart_texte):
+    <span class="py-kw">try</span>:
+        Coordonnees = Coordonnees_depart_texte.strip().split(<span class="py-str">','</span>)
+        <span class="py-kw">if</span> len(Coordonnees) != <span class="py-str">2</span>:
+            <span class="py-kw">raise</span> <span class="py-cl">ValueError</span>(<span class="py-str">"Format de coordonnées invalide"</span>)
+        lat, lon = <span class="py-fn">map</span>(float, Coordonnees)
+        <span class="py-kw">return</span> <span class="py-cl">QgsPointXY</span>(lat, lon)  <span class="py-cm"># Crée un point géographique QGIS</span>
+    <span class="py-kw">except</span> (<span class="py-cl">ValueError</span>, <span class="py-cl">IndexError</span>) <span class="py-kw">as</span> e:
+        <span class="py-cl">QMessageBox</span>.warning(<span class="py-nb">None</span>, <span class="py-str">"Erreur"</span>,
+            <span class="py-str">f"Format invalide. Utilisez: X,Y (ex: 711980,6242711). Erreur: {str(e)}"</span>)
+        <span class="py-kw">return None</span></pre>
+        </div>
+    </div>
+
+    <!-- Section 3 : Modeleur graphique QGIS -->
+    <div class="content-section">
+        <h2><span class="section-num">03 —</span> Modeleur graphique QGIS</h2>
+        <p>Le traitement algorithmique est encapsulé dans un modèle graphique QGIS qui orchestre les différentes étapes : indexation spatiale, calcul des itinéraires, calcul des temps en minutes, tri et extraction du trajet optimal.</p>
+
+        <img
+            src="../assets/images/modeleur_graphique_qgis_minutes_plugin_proxisante.png"
+            alt="Modeleur graphique QGIS — algorithme ProxiSanté"
+            class="schema-img"
+        >
+        <p class="img-caption">Fig. 1 — Modèle graphique QGIS : pipeline complet de traitement depuis les entrées (hôpitaux, réseau routier, départ) jusqu'aux sorties (chemins classés et trajet optimal)</p>
+
+        <!-- Explication du pipeline -->
+        <div class="features-grid">
+            <div class="feature-card">
+                <h3>① Indexation spatiale</h3>
+                <p>Index spatial sur les hôpitaux et le réseau routier pour optimiser les requêtes géographiques.</p>
+            </div>
+            <div class="feature-card">
+                <h3>② Calcul des itinéraires</h3>
+                <p>Itinéraire le plus rapide depuis le point de départ vers chacun des hôpitaux du réseau.</p>
+            </div>
+            <div class="feature-card">
+                <h3>③ Temps en minutes</h3>
+                <p>Conversion et calcul du temps de trajet en minutes pour chaque itinéraire calculé.</p>
+            </div>
+            <div class="feature-card">
+                <h3>④ Tri et extraction</h3>
+                <p>Tri par ordre croissant, sélection et extraction du trajet le plus rapide vers l'hôpital optimal.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 4 : Résultats dans QGIS -->
+    <div class="content-section">
+        <h2><span class="section-num">04 —</span> Résultats et visualisation</h2>
+        <p>Les résultats sont chargés automatiquement dans QGIS avec une symbologie différenciée. Les chemins vers tous les hôpitaux apparaissent en bleu, le trajet optimal vers l'hôpital le plus proche est mis en évidence en rouge.</p>
+
+        <img
+            src="../assets/images/capture_coordonnees.png"
+            alt="Résultat ProxiSanté dans QGIS — chemins bleus et trajet optimal en rouge"
+            class="schema-img"
+        >
+        <p class="img-caption">Fig. 2 — Résultat dans QGIS : chemins vers tous les hôpitaux (bleu) et trajet le plus rapide (rouge). Copie des coordonnées en Lambert-93 ou WGS84 via clic droit.</p>
+
+        <!-- Code de chargement des résultats -->
+        <p class="code-description">Extrait — chargement et stylisation automatique des résultats dans QGIS :</p>
+        <div class="code-block">
+            <pre><span class="py-kw">def</span> <span class="py-fn">charger_resultats</span>(<span class="py-nb">self</span>, pathResult1, pathResult2):
+
+    <span class="py-cm"># Tous les chemins vers les hôpitaux — ligne bleue fine</span>
+    vlayer1 = <span class="py-cl">QgsVectorLayer</span>(pathResult1, <span class="py-str">"Chemins vers les hopitaux"</span>, <span class="py-str">"ogr"</span>)
+    <span class="py-kw">if</span> vlayer1.isValid():
+        symbol1 = <span class="py-cl">QgsLineSymbol</span>.createSimple({
+            <span class="py-str">'line_color'</span>: <span class="py-str">'0,0,255,255'</span>,   <span class="py-cm"># Bleu</span>
+            <span class="py-str">'line_width'</span>: <span class="py-str">'1'</span>
+        })
+        vlayer1.renderer().setSymbol(symbol1)
+        <span class="py-cl">QgsProject</span>.instance().addMapLayer(vlayer1)
+
+    <span class="py-cm"># Trajet optimal — ligne rouge épaisse</span>
+    vlayer2 = <span class="py-cl">QgsVectorLayer</span>(pathResult2, <span class="py-str">"Hopital le plus proche"</span>, <span class="py-str">"ogr"</span>)
+    <span class="py-kw">if</span> vlayer2.isValid():
+        symbol2 = <span class="py-cl">QgsLineSymbol</span>.createSimple({
+            <span class="py-str">'line_color'</span>: <span class="py-str">'255,0,0,255'</span>,   <span class="py-cm"># Rouge</span>
+            <span class="py-str">'line_width'</span>: <span class="py-str">'2'</span>
+        })
+        vlayer2.renderer().setSymbol(symbol2)
+        <span class="py-cl">QgsProject</span>.instance().addMapLayer(vlayer2)</pre>
+        </div>
+    </div>
+
+    <!-- Section 5 : Extension QGIS -->
+    <div class="content-section">
+        <h2><span class="section-num">05 —</span> Installation — Extension QGIS</h2>
+        <p>Le plugin est installable directement depuis le gestionnaire d'extensions de QGIS et apparaît dans le menu Extensions et la barre d'outils.</p>
+
+        <img
+            src="../assets/images/plugin_proxisante_QGIS.png"
+            alt="Plugin ProxiSanté dans le gestionnaire d'extensions QGIS"
+            class="schema-img"
+        >
+        <p class="img-caption">Fig. 3 — Plugin ProxiSanté installé dans QGIS — gestionnaire d'extensions avec description, catégorie et liens</p>
+
+        <!-- Liens -->
+        <div style="margin-top:2rem; display:flex; gap:1.5rem; flex-wrap:wrap;">
+            <a href="https://codeberg.org/Geomagicien/qgis-plugin" target="_blank"
+               style="display:inline-flex; align-items:center; gap:8px; color:var(--accent); font-weight:500;">
+                <span>Voir le dépôt</span>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                    <path d="M5 12h14m0 0l-7-7m7 7l-7 7" stroke="currentColor" stroke-width="2"/>
+                </svg>
+            </a>
+            <a href="../scripts/python/ProxiSante.py" target="_blank"
+               style="display:inline-flex; align-items:center; gap:8px; color:var(--accent); font-weight:500;">
+                <span>Voir le script Python</span>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                    <path d="M5 12h14m0 0l-7-7m7 7l-7 7" stroke="currentColor" stroke-width="2"/>
+                </svg>
+            </a>
+        </div>
+    </div>
+
+    <!-- Pied de page -->
+    <div style="text-align:center; padding:3rem; color:var(--text-muted); font-size:0.85rem; border-top:1px solid var(--border);">
+        <p>Hébergé sur Codeberg • 100% Open Source</p>
+        <a href="../index.html" style="color:var(--accent); margin-top:1rem; display:inline-block;">← Retour au portfolio</a>
+    </div>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close">&times;</button>
+        <img src="" alt="Image agrandie">
+    </div>
+
+    <script>
+        // Lightbox pour zoomer les images
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = lightbox.querySelector('img');
+        const lightboxClose = lightbox.querySelector('.lightbox-close');
+
+        document.querySelectorAll('.schema-img, .img-grid-item img').forEach(img => {
+            img.addEventListener('click', () => {
+                lightboxImg.src = img.src;
+                lightbox.classList.add('active');
+            });
+        });
+
+        lightbox.addEventListener('click', () => {
+            lightbox.classList.remove('active');
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') lightbox.classList.remove('active');
+        });
+
+        // Cache/montre le header selon la direction du scroll
+        let lastScroll = 0;
+        const header = document.querySelector('.page-nav');
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+
+            if (currentScroll <= 0) {
+                header.style.removeProperty('transform');
+                return;
+            }
+
+            if (currentScroll > lastScroll && currentScroll > 100) {
+                header.style.transform = 'translateY(-100%)';
+            } else {
+                header.style.transform = 'translateY(0)';
+            }
+
+            lastScroll = currentScroll;
+        });
+    </script>
+
+</body>
+</html>
