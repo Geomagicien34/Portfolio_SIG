@@ -212,10 +212,7 @@ img {
     opacity: 0.8;
 }
 
-/** Mode clair : logos avec fond pour visibilité */
-[data-theme="light"] .social-logo img {
-    background: rgba(0, 0, 0, 0.05);
-}
+
 
 
 /* -------------------------------------------------
@@ -766,7 +763,7 @@ img {
     --accent: #0969da;
     --accent-hover: #0550ae;
     --link: #0969da;
-    --menu-bg: rgba(230, 240, 255, 0.98);
+    --menu-bg: rgb(230, 240, 255);
     --menu-text: #24292f;
     --hero-overlay: rgba(255, 255, 255, 0.75);
     --tag-bg: rgba(9, 105, 218, 0.1);
