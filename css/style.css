@@ -183,12 +183,38 @@ img {
     gap: 1.5rem;
     margin-top: 1.5rem;
     flex-wrap: wrap;
+    padding-left: 2rem;
 }
 
 /** Lien réseaux sociaux */
 .social-link {
     color: var(--accent);
     font-size: 0.9rem;
+}
+
+/** Logo réseaux sociaux dans le menu */
+.social-logo {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.social-logo img {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+    border-radius: 4px;
+}
+
+.social-logo:hover img {
+    transform: scale(1.15);
+    opacity: 0.8;
+}
+
+/** Mode clair : logos avec fond pour visibilité */
+[data-theme="light"] .social-logo img {
+    background: rgba(0, 0, 0, 0.05);
 }
 
 
@@ -716,7 +742,7 @@ img {
     --accent: #58a6ff;
     --accent-hover: #79b8ff;
     --link: #58a6ff;
-    --menu-bg: rgba(10, 15, 40, 0.97);
+    --menu-bg: rgb(10, 15, 40);
     --menu-text: #c9d1d9;
     --hero-overlay: rgba(5, 10, 35, 0.75);
     --tag-bg: rgba(88, 166, 255, 0.15);
