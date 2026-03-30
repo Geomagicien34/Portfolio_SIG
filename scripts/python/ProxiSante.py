@@ -8,8 +8,8 @@
                               -------------------
         begin                : 2024-10-28
         git sha              : $Format:%H$
-        copyright            : (C) 2024 by YC/SDS
-        email                : samuel.dos-santos@etu.umontpellier.fr, ylane.crouzet@etu.umontpellier.fr
+        copyright            : (C) 2024 by Geomagicien
+        email                : etudes.geomatique@ikmail.com
  ***************************************************************************/
 
 /***************************************************************************

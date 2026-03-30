@@ -845,7 +845,7 @@ img {
     /** Bouton fermer visible sur mobile */
     .menu-close {
         display: block;
-        left: 1rem;
+        left: 0.5rem;
         right: auto;
     }
 

@@ -419,6 +419,38 @@ point_depart = <span class="py-nb">self</span>.Obtenir_Coordonnees_depart(Coordo
         </div>
     </div>
 
+    <!-- Section : Export Python du modeleur -->
+    <div class="content-section">
+        <h2><span class="section-num">03b —</span> Export Python du modèle</h2>
+        <p>Le modèle graphique a été exporté en Python sous forme de classe <code style="color:#10b981;">QgsProcessingAlgorithm</code>. Ce script est ensuite importé et exécuté directement depuis le fichier principal du plugin, ce qui permet d'encapsuler tout le pipeline de traitement dans un algorithme QGIS réutilisable.</p>
+
+        <p class="code-description">Architecture — appel du modèle depuis le plugin principal :</p>
+        <div class="code-block">
+            <pre><span class="py-cm"># Import du modèle exporté depuis le modeleur graphique</span>
+<span class="py-kw">from</span> .Temps_de_trajet_vers_hopitaux <span class="py-kw">import</span> Temps_de_trajet_vers_hopitaux
+
+<span class="py-cm"># Initialisation et exécution du modèle avec les paramètres de l'interface</span>
+<span class="py-nb">self</span>.modele = <span class="py-cl">Temps_de_trajet_vers_hopitaux</span>()
+<span class="py-nb">self</span>.modele.initAlgorithm()
+results = <span class="py-nb">self</span>.modele.processAlgorithm(parameters, context, feedback)</pre>
+        </div>
+
+        <p class="code-description">Extrait clé — calcul du temps de trajet en minutes et classement des hôpitaux :</p>
+        <div class="code-block">
+            <pre><span class="py-cm"># Calcul du temps en minutes depuis la longueur du trajet (vitesse 80 km/h)</span>
+<span class="py-str">'FORMULA'</span>: <span class="py-str">'round($length / (80 * 1000), 4) * 60'</span>
+
+<span class="py-cm"># Tri par ordre croissant pour trouver l'hôpital le plus rapide</span>
+<span class="py-str">'EXPRESSION'</span>: <span class="py-str">'to_real("temps_minutes")'</span>
+<span class="py-str">'ASCENDING'</span>: <span class="py-cl">True</span>
+
+<span class="py-cm"># Extraction du trajet classé n°1 (le plus rapide)</span>
+<span class="py-str">'FIELD'</span>: <span class="py-str">'Classement'</span>, <span class="py-str">'VALUE'</span>: <span class="py-str">1</span></pre>
+        </div>
+
+        <p>Le code complet est disponible sur le dépôt Codeberg.</p>
+    </div>
+
     <!-- Section 4 : Résultats dans QGIS -->
     <div class="content-section">
         <h2><span class="section-num">04 —</span> Résultats et visualisation</h2>

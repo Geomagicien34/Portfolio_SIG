@@ -419,6 +419,38 @@ point_depart = <span class="py-nb">self</span>.Obtenir_Coordonnees_depart(Coordo
         </div>
     </div>
 
+    <!-- Section: Python Export of the Model -->
+    <div class="content-section">
+        <h2><span class="section-num">03b —</span> Python Model Export</h2>
+        <p>The graphical model was exported to Python as a <code style="color:#10b981;">QgsProcessingAlgorithm</code> class. This script is then imported and executed directly from the main plugin file, encapsulating the entire processing pipeline in a reusable QGIS algorithm.</p>
+
+        <p class="code-description">Architecture — calling the model from the main plugin:</p>
+        <div class="code-block">
+            <pre><span class="py-cm"># Import the exported model from the graphical modeler</span>
+<span class="py-kw">from</span> .Temps_de_trajet_vers_hopitaux <span class="py-kw">import</span> Temps_de_trajet_vers_hopitaux
+
+<span class="py-cm"># Initialization and execution of the model with interface parameters</span>
+<span class="py-nb">self</span>.modele = <span class="py-cl">Temps_de_trajet_vers_hopitaux</span>()
+<span class="py-nb">self</span>.modele.initAlgorithm()
+results = <span class="py-nb">self</span>.modele.processAlgorithm(parameters, context, feedback)</pre>
+        </div>
+
+        <p class="code-description">Key excerpt — travel time calculation in minutes and hospital ranking:</p>
+        <div class="code-block">
+            <pre><span class="py-cm"># Travel time in minutes from path length (speed 80 km/h)</span>
+<span class="py-str">'FORMULA'</span>: <span class="py-str">'round($length / (80 * 1000), 4) * 60'</span>
+
+<span class="py-cm"># Ascending sort to find the fastest hospital</span>
+<span class="py-str">'EXPRESSION'</span>: <span class="py-str">'to_real("temps_minutes")'</span>
+<span class="py-str">'ASCENDING'</span>: <span class="py-cl">True</span>
+
+<span class="py-cm"># Extraction of rank #1 path (fastest)</span>
+<span class="py-str">'FIELD'</span>: <span class="py-str">'Classement'</span>, <span class="py-str">'VALUE'</span>: <span class="py-str">1</span></pre>
+        </div>
+
+        <p>The complete code is available on the Codeberg repository.</p>
+    </div>
+
     <!-- Section 4 : Résultats dans QGIS -->
     <div class="content-section">
         <h2><span class="section-num">04 —</span> Results and Visualization</h2>
