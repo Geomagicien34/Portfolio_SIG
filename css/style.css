@@ -1288,7 +1288,9 @@ body { background: var(--bg); }
     color: #ffffff;
 }
 
-.page-nav a:hover { color: #7dd3fc; }
+[data-theme="light"] .page-nav > a:first-child {
+    color: #000000 !important;
+}
 
 [data-theme="light"] .page-nav a {
     color: #0369a1;
@@ -1770,6 +1772,33 @@ body { background: var(--bg); }
     display: flex;
     align-items: center;
     gap: 6px;
+}
+
+/** Light theme for map elements */
+[data-theme="light"] .map-menu-overlay {
+    background: rgba(200, 225, 255, 0.9);
+    border: 1px solid rgba(9, 105, 218, 0.3);
+}
+
+[data-theme="light"] .map-menu-overlay h4 {
+    color: #0a192f;
+}
+
+[data-theme="light"] .map-menu-stat {
+    color: #57606a;
+}
+
+[data-theme="light"] .map-legend {
+    background: rgba(200, 225, 255, 0.9);
+    border: 1px solid rgba(9, 105, 218, 0.3);
+}
+
+[data-theme="light"] .map-legend-title {
+    color: #57606a;
+}
+
+[data-theme="light"] .map-legend-item {
+    color: #0a192f;
 }
 
 .map-menu-stats { display: flex; flex-direction: column; gap: 6px; }
