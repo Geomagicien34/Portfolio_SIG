@@ -872,6 +872,7 @@ img {
         display: block;
         left: 0.5rem;
         right: auto;
+        top: 1rem;
     }
 
     /** Curseur désactivé sur mobile */
@@ -1313,8 +1314,19 @@ body { background: var(--bg); }
 @media (max-width: 768px) {
     .plugin-logo { flex-direction: column; align-items: flex-start; gap: 1rem; }
     .plugin-logo img { width: 60px; height: 60px; }
-    .page-nav { padding: 1rem; }
-    .page-nav-links { display: none; }
+    .page-nav { 
+        padding: 0.8rem 1rem;
+        flex-wrap: wrap;
+    }
+    .page-nav-links { 
+        display: none; 
+    }
+    .page-nav a {
+        font-size: 0.9rem;
+    }
+    .page-nav > a:first-child {
+        font-size: 1rem;
+    }
 }
 
 /** Code block styles */
