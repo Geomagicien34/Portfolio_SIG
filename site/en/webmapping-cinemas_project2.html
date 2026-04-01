@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebMapping Cinemas - Geomatician</title>
+    <link rel="icon" type="image/png" href="../../assets/images/logo_geomatique.png">
+    <link rel="stylesheet" href="../../css/style.css">
+    <script src="../../js/main.js" defer></script>
+    <script src="../../js/cinema-map.js" defer></script>
+</head>
+<body>
+
+    <nav class="page-nav">
+        <a href="index.html">← Home</a>
+        <div class="page-nav-links">
+            <a href="index.html#projects">Projects</a>
+            <a href="index.html#stack">Stack</a>
+            <a href="index.html#contact">Contact</a>
+            <a href="cv.html">CV</a>
+        </div>
+    </nav>
+
+    <div class="page-hero">
+        <span class="page-tag">Project 02</span>
+
+        <div class="project-logo">
+            <img src="../../assets/images/logo_cinema.png" alt="Cinema Logo">
+            <div class="project-logo-text">
+                <h3>WebMapping — Cinematic Establishments</h3>
+                <p>JavaScript • PHP • OpenLayers • PostGIS • GeoServer • Apache</p>
+            </div>
+        </div>
+
+        <h1>Interactive WebMapping Application</h1>
+        <p>Interactive web mapping application developed in a 3/3 architecture (Client, Server, Database) to visualize and filter cinematic establishments in metropolitan France. University project carried out at Paul-Valéry University of Montpellier, M2 Geomatics 2024/2025.</p>
+
+        <div style="display:flex; gap:0.5rem; flex-wrap:wrap; margin-top:1.5rem;">
+            <span class="tag">JavaScript</span>
+            <span class="tag">OpenLayers</span>
+            <span class="tag">PHP</span>
+            <span class="tag">PostGIS</span>
+            <span class="tag">GeoServer</span>
+            <span class="tag">Apache</span>
+            <span class="tag">WMS/WFS</span>
+        </div>
+
+        <div style="margin-top:2rem;">
+            <a href="../../assets/pdf/Webmapping_Presentation.pdf" target="_blank" class="pdf-btn">
+                📊 Presentation slides
+            </a>
+            <a href="../../assets/pdf/Webmapping.pdf" target="_blank" class="pdf-btn">
+                📄 Full report
+            </a>
+        </div>
+    </div>
+
+    <div class="content-section">
+        <h2><span class="section-num">01 —</span> 3/3 Architecture</h2>
+        <p>The project is based on a classic three-tier architecture in webmapping: a spatial database, a map server, and a web client. Each layer communicates with the next to ensure dynamic and interactive rendering.</p>
+
+        <img src="../../assets/images/architecture_3-3.png" alt="3-tier architecture" class="schema-img" style="max-width: 700px; display: block; margin: 0 auto 2rem;">
+        <p class="img-caption">Fig. 1 — 3/3 Architecture: Database → Map Server → Web Client</p>
+
+        <div class="archi-grid">
+            <div class="archi-card">
+                <div class="archi-icon">🗄️</div>
+                <h3>Database</h3>
+                <p>PostgreSQL + PostGIS to store spatial data of cinemas and administrative boundaries.</p>
+            </div>
+            <div class="archi-card">
+                <div class="archi-icon">🗺️</div>
+                <h3>Map Server</h3>
+                <p>GeoServer generates WMS and WFS feeds from PostGIS. Apache + PHP ensure the connection.</p>
+            </div>
+            <div class="archi-card">
+                <div class="archi-icon">🌐</div>
+                <h3>Web Client</h3>
+                <p>HTML/CSS/JS page with OpenLayers for cartographic rendering.</p>
+            </div>
+        </div>
+
+        <div class="note-box">
+            ⚠️ This application runs on <strong>localhost</strong> — GeoServer and Apache require a server. Complete source code available on Codeberg.
+        </div>
+    </div>
+
+    <div class="content-section">
+        <h2><span class="section-num">02 —</span> Final Interface</h2>
+        <p>The interface is divided into three blocks: search forms on the left, interactive OpenLayers map in the center, and the information panel on the right.</p>
+
+        <div id="map-cinemas" style="width: 100%; height: 500px; border-radius: 12px; border: 1px solid var(--border); margin-bottom: 1rem; background: #f6f8fa;"></div>
+        <p class="img-caption">Fig. 2 — Interactive OpenLayers map with cinema points (local GeoJSON layer). Click on a point to see details.</p>
+
+        <img src="../../assets/images/page_web_finale_projet_webmapping_cinema_France.png" alt="Final interface" class="schema-img">
+        <p class="img-caption">Fig. 3 — Final interface on localhost</p>
+    </div>
+
+    <div class="content-section">
+        <h2><span class="section-num">03 —</span> Dynamic Search Forms</h2>
+        <p>The forms allow filtering cinemas according to several criteria simultaneously.</p>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <h3>🗺️ Regions</h3>
+                <p>Selection of a region with automatic zoom.</p>
+            </div>
+            <div class="feature-card">
+                <h3>📍 Departments</h3>
+                <p>Filter by department.</p>
+            </div>
+            <div class="feature-card">
+                <h3>🎭 Art & Essay</h3>
+                <p>Filter art & essay or commercial cinemas.</p>
+            </div>
+            <div class="feature-card">
+                <h3>🏘️ Communes</h3>
+                <p>Autocomplete for commune names.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="content-section">
+        <h2><span class="section-num">04 —</span> OpenLayers Map Controls</h2>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <h3>🔄 LayerSwitcher</h3>
+                <p>OSM, IGN Plan, IGN Satellite + administrative boundaries.</p>
+            </div>
+            <div class="feature-card">
+                <h3>📏 Scale Bar</h3>
+                <p>Dynamic scale bar updated on zoom.</p>
+            </div>
+            <div class="feature-card">
+                <h3>🏠 Home Button</h3>
+                <p>Return to France zoom with one click.</p>
+            </div>
+            <div class="feature-card">
+                <h3>ℹ️ Click Info</h3>
+                <p>Click on a cinema to display all its information.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="content-section">
+        <h2><span class="section-num">05 —</span> Data and Sources</h2>
+        
+        <div class="img-grid">
+            <div class="img-grid-item">
+                <img src="../../assets/images/logo_cinema.png" alt="Cinema logo" style="max-height:150px; object-fit:contain; background:var(--card-bg); padding:1rem;">
+                <p>Cinematic Establishments 2023 (CNC)</p>
+            </div>
+            <div class="img-grid-item" style="display:flex; flex-direction:column; justify-content:center; padding:1rem; background:var(--card-bg); border-radius:12px; border:1px solid var(--border);">
+                <p style="font-size:0.95rem; color:var(--text); margin:0;">
+                    📊 Cinema data — data.culture.gouv.fr<br>
+                    🗺️ Administrative boundaries — IGN ADMIN-EXPRESS<br>
+                    🛰️ Map backgrounds — OSM, IGN
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="content-section">
+        <h2><span class="section-num">06 —</span> Possible Improvements</h2>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <h3>🔵 Clustering</h3>
+                <p>Group nearby cinemas into numbered bubbles.</p>
+            </div>
+            <div class="feature-card">
+                <h3>📌 Geolocation</h3>
+                <p>Display nearby cinemas based on client position.</p>
+            </div>
+        </div>
+
+        <div style="margin-top:2rem;">
+            <a href="https://codeberg.org/Geomagicien/webmap" target="_blank" style="display:inline-flex; align-items:center; gap:8px; color:var(--accent); font-weight:500;">
+                <span>View repository</span>
+            </a>
+        </div>
+    </div>
+
+    <div style="text-align:center; padding:3rem; color:var(--text-muted); font-size:0.85rem; border-top:1px solid var(--border);">
+        <p>Hosted on Codeberg • 100% Open Source</p>
+        <a href="index.html" style="color:var(--accent); margin-top:1rem; display:inline-block;">← Back to portfolio</a>
+    </div>
+
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close">&times;</button>
+        <img src="" alt="Zoomed image">
+    </div>
+
+    <script>
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = lightbox.querySelector('img');
+
+        document.querySelectorAll('.schema-img, .img-grid-item img').forEach(img => {
+            img.addEventListener('click', () => {
+                lightboxImg.src = img.src;
+                lightbox.classList.add('active');
+            });
+        });
+
+        lightbox.addEventListener('click', () => {
+            lightbox.classList.remove('active');
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') lightbox.classList.remove('active');
+        });
+
+        let lastScroll = 0;
+        const header = document.querySelector('.page-nav');
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+
+            if (currentScroll <= 0) {
+                header.style.removeProperty('transform');
+                return;
+            }
+
+            if (currentScroll > lastScroll && currentScroll > 100) {
+                header.style.transform = 'translateY(-100%)';
+            } else {
+                header.style.transform = 'translateY(0)';
+            }
+
+            lastScroll = currentScroll;
+        });
+    </script>
+
+</body>
+</html>

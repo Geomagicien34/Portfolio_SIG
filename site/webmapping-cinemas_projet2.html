@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebMapping Cinémas - Géomaticien</title>
+    <link rel="icon" type="image/png" href="../assets/images/logo_geomatique.png">
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="../js/main.js" defer></script>
+    <script src="../js/cinema-map.js" defer></script>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="page-nav">
+        <a href="../index.html">← Accueil</a>
+        <div class="page-nav-links">
+            <a href="../index.html#projects">Projets</a>
+            <a href="../index.html#stack">Stack</a>
+            <a href="../index.html#contact">Contact</a>
+            <a href="cv.html">CV</a>
+        </div>
+    </nav>
+
+    <!-- En-tête -->
+    <div class="page-hero">
+        <span class="page-tag">Projet 02</span>
+
+        <div class="project-logo">
+            <img src="../assets/images/logo_cinema.png" alt="Logo Cinéma">
+            <div class="project-logo-text">
+                <h3>WebMapping — Établissements Cinématographiques</h3>
+                <p>JavaScript • PHP • OpenLayers • PostGIS • GeoServer • Apache</p>
+            </div>
+        </div>
+
+        <h1>Application WebMapping Interactif</h1>
+        <p>Application de cartographie web interactive développée en architecture 3/3 (Client, Serveur, Base de données) permettant de visualiser et filtrer les établissements cinématographiques de France métropolitaine. Projet universitaire réalisé à l'Université Paul-Valéry et de Montpellier, M2 Géomatique 2024/2025.</p>
+
+        <div style="display:flex; gap:0.5rem; flex-wrap:wrap; margin-top:1.5rem;">
+            <span class="tag">JavaScript</span>
+            <span class="tag">OpenLayers</span>
+            <span class="tag">PHP</span>
+            <span class="tag">PostGIS</span>
+            <span class="tag">GeoServer</span>
+            <span class="tag">Apache</span>
+            <span class="tag">WMS/WFS</span>
+        </div>
+
+        <!-- Boutons PDF -->
+        <div style="margin-top:2rem;">
+            <a href="../assets/pdf/Webmapping_Presentation.pdf" target="_blank" class="pdf-btn">
+                📊 Présentation diapositives
+            </a>
+            <a href="../assets/pdf/Webmapping.pdf" target="_blank" class="pdf-btn">
+                📄 Rapport complet
+            </a>
+        </div>
+    </div>
+
+    <!-- Section 1 : Architecture 3/3 -->
+    <div class="content-section">
+        <h2><span class="section-num">01 —</span> Architecture 3/3</h2>
+        <p>Le projet repose sur une architecture trois tiers classique en webmapping : une base de données spatiale, un serveur cartographique et un client web. Chaque couche communique avec la suivante pour assurer un rendu dynamique et interactif.</p>
+
+        <img
+            src="../assets/images/architecture_3-3.png"
+            alt="Architecture 3 tiers du projet WebMapping Cinémas"
+            class="schema-img"
+            style="max-width: 700px; display: block; margin: 0 auto 2rem;"
+        >
+        <p class="img-caption">Fig. 1 — Architecture 3/3 : Base de données → Serveur cartographique → Client web</p>
+
+        <div class="archi-grid">
+            <div class="archi-card">
+                <div class="archi-icon">🗄️</div>
+                <h3>Base de données</h3>
+                <p>PostgreSQL + PostGIS pour stocker les données spatiales des cinémas et les limites administratives (communes, départements, régions).</p>
+            </div>
+            <div class="archi-card">
+                <div class="archi-icon">🗺️</div>
+                <h3>Serveur cartographique</h3>
+                <p>GeoServer génère les flux WMS et WFS à partir de PostGIS. Apache HTTP Server + PHP assurent la connexion dynamique entre la BDD et le client.</p>
+            </div>
+            <div class="archi-card">
+                <div class="archi-icon">🌐</div>
+                <h3>Client web</h3>
+                <p>Page HTML/CSS/JS avec OpenLayers pour le rendu cartographique. Firefox comme navigateur client pour l'affichage final en localhost.</p>
+            </div>
+        </div>
+
+        <div class="note-box">
+            ⚠️ Cette application fonctionne en <strong>localhost</strong> — GeoServer et Apache nécessitent un serveur allumé en permanence. L'hébergement en ligne nécessiterait un VPS dédié. Le code source complet est disponible sur Codeberg.
+        </div>
+    </div>
+
+    <!-- Section 2 : Résultat final -->
+    <div class="content-section">
+        <h2><span class="section-num">02 —</span> Interface finale</h2>
+        <p>L'interface est divisée en trois blocs : les formulaires de recherche à gauche, la carte interactive OpenLayers au centre, et le panneau d'informations sur le cinéma sélectionné à droite.</p>
+
+        <!-- Carte interactive OpenLayers -->
+        <div id="map-cinemas" style="width: 100%; height: 500px; border-radius: 12px; border: 1px solid var(--border); margin-bottom: 1rem; background: #f6f8fa;"></div>
+        <p class="img-caption">Fig. 2 — Carte interactive OpenLayers : fond de carte © OpenStreetMap, points des cinémas (couche locale GeoJSON). Cliquez sur un point pour voir les informations.</p>
+
+        <img
+            src="../assets/images/page_web_finale_projet_webmapping_cinema_France.png"
+            alt="Page web finale du projet WebMapping Cinémas France"
+            class="schema-img"
+        >
+        <p class="img-caption">Fig. 3 — Interface finale en localhost : formulaires de recherche, carte OpenLayers avec les cinémas de France (points bleus), panneau d'informations</p>
+    </div>
+
+    <!-- Section 3 : Formulaires de recherche -->
+    <div class="content-section">
+        <h2><span class="section-num">03 —</span> Formulaires de recherche dynamiques</h2>
+        <p>Les formulaires permettent de filtrer les cinémas selon plusieurs critères simultanément. Les données sont récupérées depuis PostgreSQL via des requêtes SQL dynamiques en PHP.</p>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <h3>🗺️ Régions</h3>
+                <p>Sélection d'une région et zoom automatique sur les cinémas de la région choisie.</p>
+            </div>
+            <div class="feature-card">
+                <h3>📍 Départements</h3>
+                <p>Filtre par département avec zoom sur les établissements correspondants.</p>
+            </div>
+            <div class="feature-card">
+                <h3>🎬 Programmateurs</h3>
+                <p>Sélection d'un programmateur (Pathé-Gaumont, CGR...) pour voir ses cinémas.</p>
+            </div>
+            <div class="feature-card">
+                <h3>🎭 Art et Essai</h3>
+                <p>Filtre pour n'afficher que les cinémas d'art et d'essai ou les cinémas commerciaux.</p>
+            </div>
+            <div class="feature-card">
+                <h3>🏘️ Communes</h3>
+                <p>Autocomplétion en temps réel lors de la saisie du nom de commune.</p>
+            </div>
+            <div class="feature-card">
+                <h3>🔗 Filtres combinés</h3>
+                <p>Combinaison de plusieurs filtres simultanément pour une recherche précise.</p>
+            </div>
+        </div>
+
+        <!-- Extrait PHP -->
+        <p class="code-description">Extrait PHP — requête SQL dynamique avec filtres combinés sur la base de données :</p>
+        <div class="code-block">
+            <pre><span class="php-cm">// Construction dynamique de la requête selon les filtres actifs</span>
+<span class="php-var">$sql</span> = <span class="php-str">"SELECT ST_AsGeoJSON(geom) as geojson, nom, region_admi, dep, commune
+         FROM \"etablissements-cinematographiques\" WHERE 1=1"</span>;
+
+<span class="php-kw">if</span> (!<span class="php-fn">empty</span>(<span class="php-var">$region</span>)) {
+    <span class="php-var">$sql</span> .= <span class="php-str">" AND region_admi = '"</span> . <span class="php-fn">pg_escape_string</span>(<span class="php-var">$pg_conn</span>, <span class="php-var">$region</span>) . <span class="php-str">"'"</span>;
+}
+<span class="php-kw">if</span> (!<span class="php-fn">empty</span>(<span class="php-var">$commune</span>)) {
+    <span class="php-var">$sql</span> .= <span class="php-str">" AND LOWER(commune) = LOWER('"</span>
+           . <span class="php-fn">pg_escape_string</span>(<span class="php-var">$pg_conn</span>, <span class="php-var">$commune</span>) . <span class="php-str">"')"</span>;
+}
+
+<span class="php-cm">// Retour en GeoJSON pour OpenLayers</span>
+<span class="php-kw">echo</span> <span class="php-fn">json_encode</span>([<span class="php-str">"type"</span> => <span class="php-str">"FeatureCollection"</span>, <span class="php-str">"features"</span> => <span class="php-var">$features</span>]);</pre>
+        </div>
+    </div>
+
+    <!-- Section 4 : Contrôles cartographiques -->
+    <div class="content-section">
+        <h2><span class="section-num">04 —</span> Contrôles cartographiques OpenLayers</h2>
+        <p>La carte intègre plusieurs contrôles et interactions avancés d'OpenLayers pour une expérience utilisateur optimale.</p>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <h3>🔄 LayerSwitcher</h3>
+                <p>Gestion des couches : OSM, Plan IGN, Satellite SPOT IGN 2023 + limites administratives.</p>
+            </div>
+            <div class="feature-card">
+                <h3>📏 Échelle graphique</h3>
+                <p>Barre d'échelle dynamique mise à jour au zoom pour une lecture cartographique précise.</p>
+            </div>
+            <div class="feature-card">
+                <h3>🌍 Vue d'ensemble</h3>
+                <p>OverviewMap pour un contexte géographique international.</p>
+            </div>
+            <div class="feature-card">
+                <h3>📌 Coordonnées souris</h3>
+                <p>Position de la souris affichée en temps réel en Lambert-93 (EPSG:2154).</p>
+            </div>
+            <div class="feature-card">
+                <h3>🏠 Bouton Home</h3>
+                <p>Retour au zoom France entière en un clic.</p>
+            </div>
+            <div class="feature-card">
+                <h3>ℹ️ Infos au clic</h3>
+                <p>Clic sur un cinéma pour afficher toutes ses informations : nom, adresse, écrans, fauteuils, séances, part de marché...</p>
+            </div>
+        </div>
+
+        <!-- Extrait JS OpenLayers -->
+        <p class="code-description">Extrait JavaScript — récupération des données PHP et affichage dans OpenLayers en WFS :</p>
+        <div class="code-block">
+            <pre><span class="js-cm">// Récupération des cinémas filtrés depuis PHP en GeoJSON</span>
+<span class="js-kw">const</span> vectorSource = <span class="js-kw">new</span> ol.source.<span class="js-fn">Vector</span>({
+    <span class="js-fn">format</span>: <span class="js-kw">new</span> ol.format.<span class="js-fn">GeoJSON</span>(),
+    <span class="js-fn">url</span>: <span class="js-kw">function</span>(extent) {
+        <span class="js-kw">return</span> <span class="js-str">'BD_cinemas.php?region='</span> + region
+               + <span class="js-str">'&amp;departement='</span> + departement
+               + <span class="js-str">'&amp;ae='</span> + ae;
+    },
+    <span class="js-fn">strategy</span>: ol.loadingstrategy.<span class="js-fn">bbox</span>
+});
+
+<span class="js-cm">// Affichage des informations au clic sur un cinéma</span>
+map.<span class="js-fn">on</span>(<span class="js-str">'click'</span>, <span class="js-kw">function</span>(evt) {
+    <span class="js-kw">const</span> feature = map.<span class="js-fn">forEachFeatureAtPixel</span>(evt.pixel,
+        <span class="js-kw">function</span>(feature) { <span class="js-kw">return</span> feature; });
+    <span class="js-kw">if</span> (feature) {
+        <span class="js-kw">const</span> props = feature.<span class="js-fn">getProperties</span>();
+        document.<span class="js-fn">getElementById</span>(<span class="js-str">'info'</span>).innerHTML =
+            <span class="js-str">`&lt;b&gt;${props.nom}&lt;/b&gt;&lt;br&gt;
+             Commune: ${props.commune}&lt;br&gt;
+             Département: ${props.dep}`</span>;
+    }
+});</pre>
+        </div>
+    </div>
+
+    <!-- Section 5 : Données -->
+    <div class="content-section">
+        <h2><span class="section-num">05 —</span> Données et sources</h2>
+        <p>Le projet combine données thématiques et fonds de carte issus de sources officielles ouvertes.</p>
+
+        <div class="img-grid">
+            <div class="img-grid-item">
+                <img src="../assets/images/logo_cinema.png" alt="Logo cinéma" style="max-height:150px; object-fit:contain; background:var(--card-bg); padding:1rem;">
+                <p>Données thématiques — Établissements cinématographiques 2023 (CNC) — data.culture.gouv.fr</p>
+            </div>
+            <div class="img-grid-item" style="display:flex; flex-direction:column; justify-content:center; padding:1rem; background:var(--card-bg); border-radius:12px; border:1px solid var(--border);">
+                <p style="font-size:0.95rem; color:var(--text); margin:0;">
+                    📊 Données cinémas (SHP 2023) — <a href="https://data.culture.gouv.fr" target="_blank" style="color:var(--accent);">data.culture.gouv.fr</a><br><br>
+                    🗺️ Limites administratives — IGN ADMIN-EXPRESS<br><br>
+                    🛰️ Fonds de carte — OSM, Plan IGN, Satellite SPOT IGN 2023<br><br>
+                    📡 Flux WMS/WFS — IGN Géoservices, OpenStreetMap
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 6 : Améliorations possibles -->
+    <div class="content-section">
+        <h2><span class="section-num">06 —</span> Améliorations techniques envisagées</h2>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <h3>🔵 Clustering</h3>
+                <p>Regroupement des cinémas proches en bulles numérotées aux zooms éloignés.</p>
+            </div>
+            <div class="feature-card">
+                <h3>📌 Géolocalisation</h3>
+                <p>Détection automatique de la position du client pour afficher les cinémas proches.</p>
+            </div>
+            <div class="feature-card">
+                <h3>📜 Légende dynamique</h3>
+                <p>Légende cartographique mise à jour selon les couches actives.</p>
+            </div>
+            <div class="feature-card">
+                <h3>⚡ Cache tuiles</h3>
+                <p>Mise en cache côté client pour réduire les temps de chargement.</p>
+            </div>
+        </div>
+
+        <!-- Lien code source -->
+        <div style="margin-top:2rem;">
+            <a href="https://codeberg.org/Geomagicien/webmap" target="_blank"
+               style="display:inline-flex; align-items:center; gap:8px; color:var(--accent); font-weight:500;">
+                <span>Voir le dépôt</span>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                    <path d="M5 12h14m0 0l-7-7m7 7l-7 7" stroke="currentColor" stroke-width="2"/>
+                </svg>
+            </a>
+        </div>
+    </div>
+
+    <!-- Pied de page -->
+    <div style="text-align:center; padding:3rem; color:var(--text-muted); font-size:0.85rem; border-top:1px solid var(--border);">
+        <p>Hébergé sur Codeberg • 100% Open Source</p>
+        <a href="../index.html" style="color:var(--accent); margin-top:1rem; display:inline-block;">← Retour au portfolio</a>
+    </div>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close">&times;</button>
+        <img src="" alt="Image agrandie">
+    </div>
+
+</body>
+</html>

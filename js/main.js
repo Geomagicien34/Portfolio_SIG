@@ -136,7 +136,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Cache/montre le header selon la direction du scroll
     let lastScroll = 0;
-    const header = document.querySelector('.nav');
+    const header = document.querySelector('.nav, .page-nav');
 
     window.addEventListener('scroll', () => {
         const currentScroll = window.pageYOffset;
