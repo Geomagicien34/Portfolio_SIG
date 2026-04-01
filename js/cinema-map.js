@@ -86,7 +86,11 @@ document.addEventListener('DOMContentLoaded', () => {
             view.animate({ zoom: zoom - 1, duration: 200 });
         };
 
-        fetch('../../data/etablissements-cinematographiques/etablissements-cinematographiques.geojson')
+        const pagePath = window.location.pathname;
+        const depth = pagePath.includes('/en/') ? '../../' : '../';
+        const geojsonPath = depth + 'data/etablissements-cinematographiques/etablissements-cinematographiques.geojson';
+
+        fetch(geojsonPath)
             .then(response => {
                 if (!response.ok) throw new Error('Erreur: ' + response.status);
                 return response.json();
