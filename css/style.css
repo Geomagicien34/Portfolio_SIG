@@ -870,7 +870,8 @@ img {
     /** Bouton fermer visible sur mobile */
     .menu-close {
         display: block;
-        left: 0.5rem;
+        position: fixed;
+        left: 1rem;
         right: auto;
         top: 1rem;
     }
@@ -1319,13 +1320,17 @@ body { background: var(--bg); }
         flex-wrap: wrap;
     }
     .page-nav-links { 
-        display: none; 
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        margin-top: 0.5rem;
+        gap: 0.5rem;
     }
     .page-nav a {
-        font-size: 0.9rem;
+        font-size: 0.75rem;
     }
     .page-nav > a:first-child {
-        font-size: 1rem;
+        font-size: 0.9rem;
     }
 }
 
