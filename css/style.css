@@ -1766,6 +1766,9 @@ body { background: var(--bg); }
     .project-tags {
         justify-content: center;
     }
+    .page-hero > div[style*="margin-left"] {
+        margin-left: 0 !important;
+    }
 }
 
 /** Map container */
