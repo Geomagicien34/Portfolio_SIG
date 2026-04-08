@@ -433,6 +433,7 @@ img {
     display: flex;
     gap: 0.5rem;
     flex-wrap: wrap;
+    margin-top: 1.5rem;
     margin-bottom: 1.5rem;
 }
 
@@ -966,6 +967,18 @@ body { background: var(--bg); }
     margin: 1.5rem 0;
     transition: transform 0.3s, box-shadow 0.3s;
     cursor: zoom-in;
+    position: relative;
+}
+
+.schema-img::before {
+    content: '🔍';
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    font-size: 1.5rem;
+    opacity: 0.7;
+    z-index: 1;
+    pointer-events: none;
 }
 
 .schema-img:hover {
@@ -992,6 +1005,19 @@ body { background: var(--bg); }
     width: 100%;
     border-radius: 8px;
     border: 1px solid var(--border);
+    cursor: zoom-in;
+    position: relative;
+}
+
+.img-grid-item img::before {
+    content: '🔍';
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    font-size: 1.2rem;
+    opacity: 0.7;
+    z-index: 1;
+    pointer-events: none;
 }
 
 .img-grid-item p {
