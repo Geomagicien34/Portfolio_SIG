@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
     <title>WebMapping Cinémas - Géomaticien</title>
     <link rel="icon" type="image/png" href="../assets/images/logo_geomatique.png">
     <link rel="stylesheet" href="../css/style.css">
@@ -291,6 +292,26 @@ map.<span class="js-fn">on</span>(<span class="js-str">'click'</span>, <span cla
         <button class="lightbox-close">&times;</button>
         <img src="" alt="Image agrandie">
     </div>
+
+    <script>
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = lightbox.querySelector('img');
+        
+        document.querySelectorAll('.schema-img, .img-grid-item img').forEach(img => {
+            img.addEventListener('click', () => {
+                lightboxImg.src = img.src;
+                lightbox.classList.add('active');
+            });
+        });
+
+        lightbox.addEventListener('click', () => {
+            lightbox.classList.remove('active');
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') lightbox.classList.remove('active');
+        });
+    </script>
 
 </body>
 </html>

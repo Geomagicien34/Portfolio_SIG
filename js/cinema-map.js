@@ -26,7 +26,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const osmLayer = new ol.layer.Tile({
             source: new ol.source.OSM({
-                attributions: '© OpenStreetMap'
+                url: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                attributions: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+                cacheSize: 4096
             })
         });
         map.addLayer(osmLayer);

@@ -876,6 +876,10 @@ img {
         right: auto !important;
     }
 
+    [data-theme="light"] .menu-close {
+        color: #000000 !important;
+    }
+
     /** Curseur désactivé sur mobile */
     .cursor,
     .cursor-follower {
@@ -1743,6 +1747,15 @@ body { background: var(--bg); }
 
 .pdf-btn:hover {
     background: var(--tag-border);
+}
+
+@media (max-width: 768px) {
+    .pdf-btn {
+        display: block;
+        width: fit-content;
+        margin: 0.5rem auto;
+        text-align: center;
+    }
 }
 
 /** Map container */
