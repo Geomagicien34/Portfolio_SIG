@@ -962,6 +962,11 @@ img {
         z-index: 300;
     }
 
+    /** Boutons langue/thème toujours au-dessus du menu */
+    .nav-right {
+        z-index: 400;
+    }
+
     /** Bouton fermer visible sur mobile - tout à gauche */
     .menu-close {
         display: block !important;
@@ -1464,8 +1469,7 @@ body { background: var(--bg); }
         font-size: 0.85rem;
     }
 }
-    }
-}
+
 
 /** Code block styles */
 .code-block {
