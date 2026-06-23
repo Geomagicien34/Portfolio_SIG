@@ -5,20 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="referrer" content="strict-origin-when-cross-origin">
     <title>QGIS Plugin ProxiSanté - Geomatician</title>
-    <link rel="icon" type="image/png" href="../../assets/images/logo_geomatique.png">
-    <link rel="stylesheet" href="../../css/style.css">
-    <script src="../../js/main.js" defer></script>
+    <link rel="icon" type="image/png" href="../assets/images/logo_geomatique.png">
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="../js/main.js" defer></script>
 </head>
 <body>
 
     <!-- Navigation -->
     <nav class="page-nav">
-        <a href="index.html">← Home</a>
+        <a href="../index_en.html">← Home</a>
         <div class="page-nav-links">
-            <a href="index.html#projects">Projects</a>
-            <a href="index.html#stack">Stack</a>
-            <a href="index.html#contact">Contact</a>
-            <a href="cv.html">CV</a>
+            <a href="../index_en.html#projects">Projects</a>
+            <a href="../index_en.html#stack">Stack</a>
+            <a href="../index_en.html#contact">Contact</a>
+            <a href="cv_en.html">CV</a>
         </div>
     </nav>
 
@@ -28,7 +28,7 @@
 
         <!-- Logo + titre -->
         <div class="plugin-logo">
-            <img src="../../assets/images/icon_plugin_proxisante.png" alt="ProxiSanté Icon">
+            <img src="../assets/images/icon_plugin_proxisante.png" alt="ProxiSanté Icon">
             <div class="plugin-logo-text">
                 <h3>ProxiSanté</h3>
                 <p>QGIS Plugin • Python • PyQGIS • Qt Designer • Graphical Modeler</p>
@@ -49,7 +49,7 @@
 
         <!-- PDF button -->
         <div style="margin-top:1.5rem; margin-left: -27.5rem; display: flex; justify-content: center;">
-            <a href="../../assets/pdf/Plugin_Qgis_portfolio.pdf" target="_blank" class="pdf-btn">
+            <a href="../assets/pdf/Plugin_Qgis_portfolio.pdf" target="_blank" class="pdf-btn">
                 📄 Full Report (PDF)
             </a>
         </div>
@@ -87,11 +87,11 @@
 
         <div class="img-grid">
             <div class="img-grid-item">
-                <img src="../../assets/images/IU_final_plugin_proxisante.png" alt="ProxiSanté plugin final interface">
+                <img src="../assets/images/IU_final_plugin_proxisante.png" alt="ProxiSanté plugin final interface">
                 <p>Final interface — coordinate input, scale and layer selection</p>
             </div>
             <div class="img-grid-item">
-                <img src="../../assets/images/Qt_designer_IU_slots_plugin_proxisante.png" alt="Qt Designer — signals and slots editor">
+                <img src="../assets/images/Qt_designer_IU_slots_plugin_proxisante.png" alt="Qt Designer — signals and slots editor">
                 <p>Qt Designer — signals and slots editor (mScaleWidget, mMapLayerComboBox, lineEdit)</p>
             </div>
         </div>
@@ -127,7 +127,7 @@ point_depart = <span class="py-nb">self</span>.Obtenir_Coordonnees_depart(Coordo
         <p>Algorithm processing is encapsulated in a QGIS graphical model that orchestrates the different steps: spatial indexing, route calculation, travel time calculation in minutes, sorting and optimal route extraction.</p>
 
         <img
-            src="../../assets/images/modeleur_graphique_qgis_minutes_plugin_proxisante.png"
+            src="../assets/images/modeleur_graphique_qgis_minutes_plugin_proxisante.png"
             alt="QGIS Graphical Modeler — ProxiSanté algorithm"
             class="schema-img"
         >
@@ -192,7 +192,7 @@ results = <span class="py-nb">self</span>.modele.processAlgorithm(parameters, co
         <p>Results are automatically loaded into QGIS with differentiated symbology. Paths to all hospitals appear in blue, the optimal route to the nearest hospital is highlighted in red.</p>
 
         <img
-            src="../../assets/images/capture_coordonnees_plugin_qgis.png"
+            src="../assets/images/capture_coordonnees_plugin_qgis.png"
             alt="ProxiSanté result in QGIS — blue paths and optimal route in red"
             class="schema-img"
         >
@@ -231,7 +231,7 @@ results = <span class="py-nb">self</span>.modele.processAlgorithm(parameters, co
         <p>The plugin can be installed directly from the QGIS plugin manager and appears in the Extensions menu and toolbar.</p>
 
         <img
-            src="../../assets/images/plugin_proxisante_QGIS.png"
+            src="../assets/images/plugin_proxisante_QGIS.png"
             alt="ProxiSanté Plugin in QGIS plugin manager"
             class="schema-img"
         >
@@ -246,7 +246,7 @@ results = <span class="py-nb">self</span>.modele.processAlgorithm(parameters, co
                     <path d="M5 12h14m0 0l-7-7m7 7l-7 7" stroke="currentColor" stroke-width="2"/>
                 </svg>
             </a>
-            <a href="../scripts/python/ProxiSante.py" target="_blank"
+            <a href="scripts/python/ProxiSante.py" target="_blank"
                style="display:inline-flex; align-items:center; gap:8px; color:var(--accent); font-weight:500;">
                 <span>View Python script</span>
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
@@ -259,7 +259,7 @@ results = <span class="py-nb">self</span>.modele.processAlgorithm(parameters, co
     <!-- Pied de page -->
     <div style="text-align:center; padding:3rem; color:var(--text-muted); font-size:0.85rem; border-top:1px solid var(--border);">
         <p>Hosted on Codeberg • 100% Open Source</p>
-        <a href="index.html" style="color:var(--accent); margin-top:1rem; display:inline-block;">← Back to portfolio</a>
+        <a href="../index_en.html" style="color:var(--accent); margin-top:1rem; display:inline-block;">← Back to portfolio</a>
     </div>
 
     <!-- Lightbox -->

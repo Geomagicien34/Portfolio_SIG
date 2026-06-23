@@ -11,36 +11,26 @@ document.addEventListener('DOMContentLoaded', () => {
     // GESTION DE LA LANGUE (FR / EN)
     // ============================================
 
-    /** Bouton de changement de langue */
-    const langBtn = document.querySelector('.lang-btn');
-
     /** Récupère le chemin de la page actuelle */
     const currentPage = window.location.pathname;
 
     /** Vérifie si on est sur la page anglaise */
-    const isEnglishPage = currentPage.includes('/en/');
+    const isEnglishPage = currentPage.includes('_en.html');
 
-    // Si page anglaise, mémorise la langue et corrige les liens Home
+    // Si page anglaise, mémorise la langue
     if (isEnglishPage) {
         localStorage.setItem('lang', 'en');
-
-        // Corrige les liens "Accueil" pour pointer vers la version anglaise
-        document.querySelectorAll('.menu-link[href*="index"]').forEach(link => {
-            const href = link.getAttribute('href');
-            if (href === '../index.html' || href === '../../index.html') {
-                link.setAttribute('href', '../../index.html');
-            }
-        });
     }
 
-    // Au clic sur le bouton de langue
-    langBtn?.addEventListener('click', () => {
-        // Bascule entre FR et EN dans le localStorage
-        if (currentPage.includes('/en/')) {
-            localStorage.setItem('lang', 'fr');
-        } else {
-            localStorage.setItem('lang', 'en');
-        }
+    // Au clic sur un bouton de langue, mémorise la langue destination
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            if (currentPage.includes('_en.html')) {
+                localStorage.setItem('lang', 'fr');
+            } else {
+                localStorage.setItem('lang', 'en');
+            }
+        });
     });
 
 

@@ -157,6 +157,10 @@ img {
     transition: opacity 0.2s;
 }
 
+[data-theme="light"] .nav-social img {
+    opacity: 0.85;
+}
+
 .nav-social img:hover {
     opacity: 1;
 }
