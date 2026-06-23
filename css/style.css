@@ -159,7 +159,7 @@ img {
     position: fixed;
     top: 0.5rem;
     right: 2rem;
-    z-index: 200;
+    z-index: 9999;
 }
 
 
@@ -962,9 +962,9 @@ img {
         z-index: 300;
     }
 
-    /** Boutons langue/thème toujours au-dessus du menu */
+    /** Sur mobile, les boutons langue/thème restent sous le menu */
     .nav-right {
-        z-index: 400;
+        z-index: 200;
     }
 
     /** Bouton fermer visible sur mobile - tout à gauche */
