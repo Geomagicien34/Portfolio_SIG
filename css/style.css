@@ -59,6 +59,15 @@ img {
     backdrop-filter: blur(8px);
 }
 
+/** Nav-right intégré dans la nav desktop */
+.nav .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-left: auto;
+    position: static;
+}
+
 /** Caché sur mobile */
 @media (max-width: 768px) {
     .nav {
@@ -151,15 +160,21 @@ img {
     }
 }
 
-/** Conteneur des boutons langue et thème (droite) */
-.nav-right {
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-    position: fixed;
-    top: 0.5rem;
-    right: 2rem;
-    z-index: 9999;
+/** Conteneur des boutons langue et thème (droite) - mobile uniquement */
+.nav-right-mobile {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .nav-right-mobile {
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+        position: fixed;
+        top: 0.5rem;
+        right: 2rem;
+        z-index: 200;
+    }
 }
 
 

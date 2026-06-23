@@ -78,33 +78,26 @@ document.addEventListener('DOMContentLoaded', () => {
     // THÈME CLAIR / SOMBRE
     // ============================================
 
-    const themeBtn = document.getElementById('theme-toggle');         // Bouton thème
-    const themeIcon = themeBtn?.querySelector('.theme-icon');         // Icône du bouton
+    const themeBtns = document.querySelectorAll('.theme-btn');
 
-    // Récupère le thème sauvegardé ou utilise "dark" par défaut
     const savedTheme = localStorage.getItem('theme') || 'dark';
     document.documentElement.setAttribute('data-theme', savedTheme);
 
-    // Met à jour l'icône selon le thème actuel
-    if (themeIcon) {
-        themeIcon.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
-    }
-
-    // Bascule entre thème clair et sombre
-    themeBtn?.addEventListener('click', () => {
-        const current = document.documentElement.getAttribute('data-theme');
-        const next = current === 'dark' ? 'light' : 'dark';
-
-        // Applique le nouveau thème
-        document.documentElement.setAttribute('data-theme', next);
-
-        // Sauvegarde dans localStorage
-        localStorage.setItem('theme', next);
-
-        // Met à jour l'icône
-        if (themeIcon) {
-            themeIcon.textContent = next === 'dark' ? '☀️' : '🌙';
+    themeBtns.forEach(btn => {
+        const icon = btn.querySelector('.theme-icon');
+        if (icon) {
+            icon.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
         }
+        btn.addEventListener('click', () => {
+            const current = document.documentElement.getAttribute('data-theme');
+            const next = current === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', next);
+            localStorage.setItem('theme', next);
+            themeBtns.forEach(b => {
+                const i = b.querySelector('.theme-icon');
+                if (i) i.textContent = next === 'dark' ? '☀️' : '🌙';
+            });
+        });
     });
 
 
