@@ -37,7 +37,7 @@
     <!-- ================================================
          NAVIGATION (Fixed header)
          ================================================ -->
-    <!-- Burger button (left) -->
+    <!-- Burger button (left) - mobile only -->
     <div class="nav-container">
         <button class="burger-btn" id="burger">
             <span></span>
@@ -46,7 +46,7 @@
         </button>
     </div>
     <!-- Language and theme buttons (right) -->
-    <div class="nav-right">
+    <div class="nav-right" id="nav-right">
         <a href="../../index.html" class="lang-btn">FR</a>
         <button id="theme-toggle" class="theme-btn" title="Toggle theme">
             <span class="theme-icon">☀️</span>
@@ -54,6 +54,48 @@
     </div>
 
     <nav class="nav">
+        <div class="nav-links">
+            <a href="#hero" class="nav-link">
+                <span class="nav-number">01</span>
+                <span class="nav-text">Home</span>
+            </a>
+            <a href="#projects" class="nav-link">
+                <span class="nav-number">02</span>
+                <span class="nav-text">Projects</span>
+            </a>
+            <a href="#stack" class="nav-link">
+                <span class="nav-number">03</span>
+                <span class="nav-text">Stack</span>
+            </a>
+            <a href="#contact" class="nav-link">
+                <span class="nav-number">04</span>
+                <span class="nav-text">Contact</span>
+            </a>
+            <a href="cv.html" class="nav-link">
+                <span class="nav-number">05</span>
+                <span class="nav-text">CV</span>
+            </a>
+        </div>
+        <div class="nav-social">
+            <a href="https://codeberg.org/Geomagicien" target="_blank" title="Codeberg">
+                <img src="../../assets/logos/codeberg_transparence.png" alt="Codeberg">
+            </a>
+            <a href="https://github.com/Geomagicien34" target="_blank" title="GitHub">
+                <img src="../../assets/logos/github_transparence.png" alt="GitHub">
+            </a>
+            <a href="https://www.openstreetmap.org/user/Geomagicien" target="_blank" title="OpenStreetMap">
+                <img src="../../assets/logos/osm_transparence.png" alt="OSM">
+            </a>
+            <a href="https://mapstodon.space/@Geomagicien" target="_blank" title="Mastodon">
+                <img src="../../assets/logos/mastodon_transparence.png" alt="Mastodon">
+            </a>
+            <a href="https://storymaps.arcgis.com/stories/9f847629f3eb4fef82bbb41820350989" target="_blank" title="StoryMaps">
+                <img src="../../assets/logos/storymaps_transparence.png" alt="StoryMaps">
+            </a>
+            <a href="mailto:etudes.geomatique@ikmail.com" title="Email">
+                <img src="../../assets/logos/email_transparence.png" alt="Email">
+            </a>
+        </div>
     </nav>
     
     <!-- ================================================

@@ -49,18 +49,106 @@ img {
     left: 0;
     right: 0;
     z-index: 100;
-    padding: 1rem 2rem;
-    transition: transform 0.3s ease;
+    padding: 0.8rem 2rem;
+    transition: transform 0.3s ease, background 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2.5rem;
+    background: var(--nav-bg);
+    backdrop-filter: blur(8px);
 }
 
-/** Conteneur du bouton burger (gauche) */
-.nav-container {
+/** Caché sur mobile */
+@media (max-width: 768px) {
+    .nav {
+        display: none;
+    }
+}
+
+/** Liens de navigation desktop */
+.nav-links {
+    display: flex;
+    gap: 2.5rem;
+    align-items: center;
+}
+
+.nav-link {
     display: flex;
     align-items: center;
-    position: fixed;
-    top: 1.5rem;
-    left: 0.5rem;
-    z-index: 200;
+    gap: 0.4rem;
+    color: var(--text-title);
+    font-size: 1.05rem;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.nav-link:hover {
+    color: var(--accent);
+}
+
+.nav-number {
+    font-size: 0.8rem;
+    color: var(--accent);
+    font-weight: 600;
+}
+
+.nav-text {
+    color: var(--text-title);
+}
+
+.nav-link:hover .nav-text {
+    color: var(--accent);
+}
+
+/** Icônes sociales dans la nav desktop */
+.nav-social {
+    display: flex;
+    gap: 0.6rem;
+    align-items: center;
+    margin-left: 3rem;
+}
+
+.nav-social a {
+    display: flex;
+    align-items: center;
+}
+
+.nav-social img {
+    width: 26px;
+    height: 26px;
+    opacity: 0.6;
+    transition: opacity 0.2s;
+}
+
+.nav-social img:hover {
+    opacity: 1;
+}
+
+/** Caché sur mobile */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+    }
+    .nav-social {
+        display: none;
+    }
+}
+
+/** Conteneur du bouton burger (gauche) - caché sur desktop */
+.nav-container {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .nav-container {
+        display: flex;
+        align-items: center;
+        position: fixed;
+        top: 1.5rem;
+        left: 0.5rem;
+        z-index: 200;
+    }
 }
 
 /** Conteneur des boutons langue et thème (droite) */
@@ -69,7 +157,7 @@ img {
     align-items: center;
     gap: 0.8rem;
     position: fixed;
-    top: 1.5rem;
+    top: 0.5rem;
     right: 2rem;
     z-index: 200;
 }
@@ -79,7 +167,7 @@ img {
    MENU BURGER (Mobile)
    ------------------------------------------------- */
 
-/** Bouton hamburger */
+/** Bouton hamburger - caché sur desktop */
 .burger-btn {
     background: none;
     border: none;
